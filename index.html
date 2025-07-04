@@ -13,9 +13,12 @@
 
   <style>
     :root {
-      --gold: #FFD700;
-      --dark-bg: #0d0d0d;
-      --card-bg: #1a1a1a;
+      /* ### NEW COLOR PALETTE ### */
+      --accent-violet: #af6ee1;
+      --accent-blue: #31a9dd;
+      --bg-dark-navy: #040b2d;
+      --bg-section: #2a1d53;
+      --bg-card: #513c83;
       --text-light: #f0f0f0;
       --text-muted: #ccc;
     }
@@ -23,22 +26,22 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: var(--dark-bg);
+      background-color: var(--bg-dark-navy);
       color: var(--text-light);
       line-height: 1.7;
     }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
     h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 700; }
-    h2.section-title { text-align: center; font-size: 2.8rem; color: var(--gold); margin-bottom: 50px; letter-spacing: 1px; }
+    h2.section-title { text-align: center; font-size: 2.8rem; color: var(--accent-violet); margin-bottom: 50px; letter-spacing: 1px; }
 
     header {
       position: relative;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.postimg.cc/HxNsMT7Q/temp-Image-Qja-I1u.avif') center center no-repeat;
+      background: linear-gradient(rgba(4, 11, 45, 0.7), rgba(4, 11, 45, 0.7)), url('https://i.postimg.cc/HxNsMT7Q/temp-Image-Qja-I1u.avif') center center no-repeat;
       background-size: cover; height: 100vh; display: flex; flex-direction: column;
       justify-content: center; align-items: center; text-align: center; padding: 20px;
     }
-    .hero-content h1 { font-size: 4.5rem; color: var(--gold); text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+    .hero-content h1 { font-size: 4.5rem; color: var(--accent-violet); text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
     .hero-content p { font-size: 1.3rem; color: var(--text-light); text-shadow: 1px 1px 4px rgba(0,0,0,0.7); max-width: 600px; margin-top: 10px; }
 
     nav {
@@ -48,93 +51,93 @@
       transition: background-color 0.4s ease, padding 0.4s ease;
     }
     nav.scrolled {
-      background-color: rgba(17, 17, 17, 0.9);
+      background-color: rgba(4, 11, 45, 0.85);
       backdrop-filter: blur(10px);
       padding: 15px 40px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-    .nav-logo a { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: 700; }
+    .nav-logo a { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--accent-violet); text-decoration: none; font-weight: 700; }
     .nav-links { display: flex; align-items: center; gap: 25px; }
     .nav-links a {
       color: var(--text-light); text-decoration: none; font-weight: 500;
       padding-bottom: 5px; border-bottom: 2px solid transparent;
       transition: color 0.3s, border-color 0.3s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-violet); border-bottom-color: var(--accent-violet); }
     .nav-cta a {
-      background: var(--gold); color: var(--dark-bg); padding: 8px 18px;
+      background: var(--accent-violet); color: var(--bg-dark-navy); padding: 8px 18px;
       border-radius: 5px; font-weight: 700; border-bottom: none !important;
       transition: background-color 0.3s, transform 0.3s;
     }
-    .nav-cta a:hover { color: var(--dark-bg); background-color: #fff; transform: scale(1.05); }
+    .nav-cta a:hover { color: var(--bg-dark-navy); background-color: #fff; transform: scale(1.05); }
     .nav-toggle { display: none; }
 
-    .angled-divider { position: relative; height: 100px; background-color: var(--dark-bg); overflow: hidden; }
+    .angled-divider { position: relative; height: 100px; background-color: var(--bg-dark-navy); overflow: hidden; }
     .angled-divider::after {
         content: ''; position: absolute; width: 150%; height: 100px;
-        background-color: var(--card-bg); left: -25%; top: 30px; transform: rotate(-2deg);
+        background-color: var(--bg-section); left: -25%; top: 30px; transform: rotate(-2deg);
     }
     
-    section { background-color: var(--card-bg); }
-    section#about { background-color: var(--dark-bg); }
+    section { background-color: var(--bg-section); }
+    section#about { background-color: var(--bg-dark-navy); }
 
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
     .card {
-      background: #252525; border: 1px solid #444; border-radius: 10px; padding: 30px;
+      background: #513c83; border: 1px solid #6b559d; border-radius: 10px; padding: 30px;
       text-align: center; transition: transform 0.3s, box-shadow 0.3s;
     }
     .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-    .card .icon { font-size: 3rem; color: var(--gold); margin-bottom: 20px; }
-    .card h3 { color: var(--gold); margin-bottom: 10px; font-size: 1.5rem; }
+    .card .icon { font-size: 3rem; color: var(--accent-violet); margin-bottom: 20px; }
+    .card h3 { color: var(--accent-violet); margin-bottom: 10px; font-size: 1.5rem; }
     
     #council .card h3 { font-size: 1.4rem; color: var(--text-light); }
-    #council .card img { border-radius:50%; width:120px; height:120px; margin-bottom:15px; border:3px solid var(--gold); object-fit: cover;}
+    #council .card img { border-radius:50%; width:120px; height:120px; margin-bottom:15px; border:3px solid var(--accent-violet); object-fit: cover;}
 
     .stats-button {
-      display: inline-block; padding: 15px 30px; background: var(--gold); color: var(--dark-bg);
+      display: inline-block; padding: 15px 30px; background: var(--accent-violet); color: var(--bg-dark-navy);
       border: none; border-radius: 8px; text-decoration: none; font-weight: bold;
       font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s, transform 0.3s;
     }
     .stats-button:hover { background-color: #fff; transform: scale(1.05); }
     
     #highlights .card { background: transparent; border: none; }
-    #highlights .card p { font-size: 2.5rem; font-weight: 700; color: var(--gold); }
+    #highlights .card p { font-size: 2.5rem; font-weight: 700; color: var(--accent-violet); }
     #highlights .card h3 { font-size: 1.2rem; color: var(--text-light); }
     
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
     .modal.is-open { display: flex; }
     .modal-content {
-        background-color: var(--card-bg); padding: 40px; border: 1px solid #555;
+        background-color: var(--bg-section); padding: 40px; border: 1px solid #6b559d;
         border-radius: 10px; width: 90%; max-width: 900px; position: relative;
         animation: zoomIn 0.3s ease-out; max-height: 80vh; display: flex; flex-direction: column;
     }
-    .modal-body { overflow-y: auto; } /* Allow content inside to scroll */
+    .modal-body { overflow-y: auto; }
     .close-button { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
-    .close-button:hover, .close-button:focus { color: var(--gold); }
+    .close-button:hover, .close-button:focus { color: var(--accent-violet); }
     
     .table-container { overflow: auto; }
     .csv-table { width: 100%; border-collapse: collapse; }
-    .csv-table th, .csv-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #444; }
-    .csv-table th { background-color: var(--gold); color: var(--dark-bg); font-family: 'Poppins', sans-serif; }
-    .csv-table tbody tr:nth-of-type(even) { background-color: #2a2a2a; }
-    .csv-table tbody tr:hover { background-color: #3a3a3a; }
+    .csv-table th, .csv-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #513c83; }
+    .csv-table th { background-color: var(--accent-violet); color: var(--bg-dark-navy); font-family: 'Poppins', sans-serif; }
+    .csv-table tbody tr:nth-of-type(even) { background-color: #3b2c6a; }
+    .csv-table tbody tr:hover { background-color: #513c83; }
 
-    /* ### MIGRATION MODAL STYLES REFINED ### */
-    .migration-content .main-title { font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 5px; }
+    .migration-content .main-title { font-size: 2rem; color: var(--accent-violet); text-align: center; margin-bottom: 5px; }
     .migration-content .sub-title { font-size: 1.5rem; text-align: center; margin-bottom: 25px; letter-spacing: 1px; color: var(--text-muted); }
-    .migration-content .list-heading { font-size: 1.4rem; color: var(--gold); margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 8px; }
+    .migration-content .list-heading { font-size: 1.4rem; color: var(--accent-violet); margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #513c83; padding-bottom: 8px; }
     .migration-content ul { list-style: none; padding-left: 0; }
     .migration-content li { padding-left: 10px; margin-bottom: 12px; }
-    .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; margin-left: -10px; }
+    .migration-content li::before { content: '・ '; color: var(--accent-violet); font-weight: bold; margin-left: -10px; }
 
     @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    footer { background: #111; color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9rem; border-top: 1px solid #333; }
+    footer { background: var(--bg-dark-navy); color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9rem; border-top: 1px solid #2a1d53; }
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     
     @media (max-width: 850px) {
+      nav { padding: 20px; }
       .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; z-index: 1001; }
-      .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; flex-direction: column; justify-content: center; background: var(--card-bg); transition: right 0.4s ease-in-out; }
+      .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; flex-direction: column; justify-content: center; background: var(--bg-section); transition: right 0.4s ease-in-out; }
       .nav-links.nav-active { right: 0; }
       .hero-content h1 { font-size: 3rem; }
       h2.section-title { font-size: 2.5rem; }
@@ -149,7 +152,6 @@
       h2.section-title { font-size: 2.2rem; }
       .card h3 { font-size: 1.1rem; }
       .card .icon { font-size: 2.5rem; }
-      
       #highlights .card p { font-size: 2rem; }
     }
   </style>
@@ -215,18 +217,16 @@
       <h2 class="section-title">Ready to Forge a Legend?</h2>
       <p style="max-width:600px; margin:-20px auto 30px auto; text-align:center;">We are recruiting active, committed players eager to grow and dominate. If you have team spirit and a thirst for victory, your place is here.</p>
       <div style="text-align:center;">
-        <a href="https://discord.gg/EHjcnhf8K7" target="_blank" rel="noopener noreferrer" class="stats-button discord-button" style="margin-right: 15px;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
-        <button id="open-migration-modal" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</button>
+        <a href="https://discord.gg/EHjcnhf8K7" target="_blank" rel="noopener noreferrer" class="stats-button" style="margin-right: 15px; background: var(--accent-blue);"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
+        <button id="open-migration-modal" class="stats-button" style="background-color: transparent; border: 2px solid var(--accent-violet); color: var(--accent-violet);"><i class="fa-solid fa-plane"></i> Migration Info</button>
       </div>
     </section>
   </main>
   
   <footer><p>Page created by and for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
 
-  <!-- Stats Modal -->
   <div id="stats-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div id="csv-table-container" class="table-container"><p>Loading stats...</p></div></div></div>
   
-  <!-- ### MIGRATION MODAL HTML REFINED ### -->
   <div id="migration-modal" class="modal">
     <div class="modal-content">
       <span class="close-button">×</span>
@@ -234,26 +234,13 @@
           <div class="migration-content">
             <h2 class="main-title">MIGRATION</h2>
             <h3 class="sub-title">SANDSEY - KINGDOM 3558</h3>
-            
             <h4 class="list-heading">About Our Kingdom</h4>
             <ul>
-              <li>C SEED</li>
-              <li>COUNCIL LEAD KINGDOM</li>
-              <li>DATA COLLECTION</li>
-              <li>KVK RECORD OF 3-1 (KVK 4 top 2 DKP over all KDs)</li>
-              <li>SWEET 16 LAST OSIRIS LEAGUE</li>
-              <li>FIXED MGE OUTSIDE OF KVK, FREE FOR ALL DURING KVK (MOSTLY)</li>
-              <li>1 MAIN ALLIANCES WITH 2 OTHER MAX TECH SHELLS</li>
-              <li>KVK-DRIVEN KINGDOM</li>
-              <li>DEADWEIGHT CLEARING AFTER EACH KVK</li>
-              <li>TITLE BOT</li>
+              <li>C SEED</li><li>COUNCIL LEAD KINGDOM</li><li>DATA COLLECTION</li><li>KVK RECORD OF 3-1 (KVK 4 top 2 DKP over all KDs)</li><li>SWEET 16 LAST OSIRIS LEAGUE</li><li>FIXED MGE OUTSIDE OF KVK, FREE FOR ALL DURING KVK (MOSTLY)</li><li>1 MAIN ALLIANCES WITH 2 OTHER MAX TECH SHELLS</li><li>KVK-DRIVEN KINGDOM</li><li>DEADWEIGHT CLEARING AFTER EACH KVK</li><li>TITLE BOT</li>
             </ul>
-
             <h4 class="list-heading">What We Are Looking For</h4>
             <ul>
-                <li>T4 FIGHTERS</li>
-                <li>T5 FIGHTERS</li>
-                <li>RALLY AND GARRISON PLAYERS</li>
+                <li>T4 FIGHTERS</li><li>T5 FIGHTERS</li><li>RALLY AND GARRISON PLAYERS</li>
             </ul>
           </div>
       </div>
@@ -262,7 +249,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- NAV & SCROLL SCRIPTS ---
       const nav = document.querySelector('nav');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 50) { nav.classList.add('scrolled'); } 
@@ -289,12 +275,10 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       
-      // --- MODAL LOGIC ---
       const statsModal = document.getElementById('stats-modal');
       const migrationModal = document.getElementById('migration-modal');
       const openStatsBtn = document.getElementById('open-stats-modal');
       const openMigrationBtn = document.getElementById('open-migration-modal');
-      
       const tableContainer = document.getElementById('csv-table-container');
 
       const openModal = (modal) => modal.classList.add('is-open');
@@ -302,7 +286,6 @@
 
       openStatsBtn.addEventListener('click', () => { openModal(statsModal); loadCSV(); });
       statsModal.querySelector('.close-button').addEventListener('click', () => closeModal(statsModal));
-
       openMigrationBtn.addEventListener('click', () => openModal(migrationModal));
       migrationModal.querySelector('.close-button').addEventListener('click', () => closeModal(migrationModal));
 
