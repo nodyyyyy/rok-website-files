@@ -108,6 +108,7 @@
         border-radius: 10px; width: 90%; max-width: 900px; position: relative;
         animation: zoomIn 0.3s ease-out; max-height: 80vh; display: flex; flex-direction: column;
     }
+    .modal-body { overflow-y: auto; } /* Allow content inside to scroll */
     .close-button { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
     .close-button:hover, .close-button:focus { color: var(--gold); }
     
@@ -118,12 +119,13 @@
     .csv-table tbody tr:nth-of-type(even) { background-color: #2a2a2a; }
     .csv-table tbody tr:hover { background-color: #3a3a3a; }
 
-    /* NEW: Styles for Migration Info Modal */
-    .migration-content h2 { font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 10px; }
-    .migration-content h3 { font-size: 1.5rem; text-align: center; margin-bottom: 30px; letter-spacing: 1px; }
-    .migration-content ul { list-style: none; padding-left: 0; margin-bottom: 30px; }
-    .migration-content li { padding: 8px 0; border-bottom: 1px solid #333; }
-    .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; }
+    /* ### MIGRATION MODAL STYLES REFINED ### */
+    .migration-content .main-title { font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 5px; }
+    .migration-content .sub-title { font-size: 1.5rem; text-align: center; margin-bottom: 25px; letter-spacing: 1px; color: var(--text-muted); }
+    .migration-content .list-heading { font-size: 1.4rem; color: var(--gold); margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 8px; }
+    .migration-content ul { list-style: none; padding-left: 0; }
+    .migration-content li { padding-left: 10px; margin-bottom: 12px; }
+    .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; margin-left: -10px; }
 
     @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     footer { background: #111; color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9rem; border-top: 1px solid #333; }
@@ -213,7 +215,7 @@
       <h2 class="section-title">Ready to Forge a Legend?</h2>
       <p style="max-width:600px; margin:-20px auto 30px auto; text-align:center;">We are recruiting active, committed players eager to grow and dominate. If you have team spirit and a thirst for victory, your place is here.</p>
       <div style="text-align:center;">
-        <a href="https://discord.gg/EHjcnhf8K7" target="_blank" class="discord-button" style="margin-right: 15px; background: #5865F2;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
+        <a href="https://discord.gg/EHjcnhf8K7" target="_blank" rel="noopener noreferrer" class="stats-button discord-button" style="margin-right: 15px;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
         <button id="open-migration-modal" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</button>
       </div>
     </section>
@@ -224,31 +226,36 @@
   <!-- Stats Modal -->
   <div id="stats-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div id="csv-table-container" class="table-container"><p>Loading stats...</p></div></div></div>
   
-  <!-- NEW: Migration Modal -->
+  <!-- ### MIGRATION MODAL HTML REFINED ### -->
   <div id="migration-modal" class="modal">
     <div class="modal-content">
       <span class="close-button">×</span>
-      <div class="migration-content">
-        <h2>MIGRATION</h2>
-        <h3>SANDSEY<br>KINGDOM 3558</h3>
-        <ul>
-          <li>C SEED</li>
-          <li>COUNCIL LEAD KINGDOM</li>
-          <li>DATA COLLECTION</li>
-          <li>KVK RECORD OF 3-1 (KVK 4 top 2 DKP over all KDs)</li>
-          <li>SWEET 16 LAST OSIRIS LEAGUE</li>
-          <li>FIXED MGE OUTSIDE OF KVK, FREE FOR ALL DURING KVK (MOSTLY)</li>
-          <li>1 MAIN ALLIANCES WITH 2 OTHER MAX TECH SHELLS</li>
-          <li>KVK-DRIVEN KINGDOM</li>
-          <li>DEADWEIGHT CLEARING AFTER EACH KVK</li>
-          <li>TITLE BOT</li>
-        </ul>
-        <h3>WHAT ARE WE LOOKING FOR?</h3>
-        <ul>
-            <li>T4 FIGHTERS</li>
-            <li>T5 FIGHTERS</li>
-            <li>RALLY AND GARRISON PLAYERS</li>
-        </ul>
+      <div class="modal-body">
+          <div class="migration-content">
+            <h2 class="main-title">MIGRATION</h2>
+            <h3 class="sub-title">SANDSEY - KINGDOM 3558</h3>
+            
+            <h4 class="list-heading">About Our Kingdom</h4>
+            <ul>
+              <li>C SEED</li>
+              <li>COUNCIL LEAD KINGDOM</li>
+              <li>DATA COLLECTION</li>
+              <li>KVK RECORD OF 3-1 (KVK 4 top 2 DKP over all KDs)</li>
+              <li>SWEET 16 LAST OSIRIS LEAGUE</li>
+              <li>FIXED MGE OUTSIDE OF KVK, FREE FOR ALL DURING KVK (MOSTLY)</li>
+              <li>1 MAIN ALLIANCES WITH 2 OTHER MAX TECH SHELLS</li>
+              <li>KVK-DRIVEN KINGDOM</li>
+              <li>DEADWEIGHT CLEARING AFTER EACH KVK</li>
+              <li>TITLE BOT</li>
+            </ul>
+
+            <h4 class="list-heading">What We Are Looking For</h4>
+            <ul>
+                <li>T4 FIGHTERS</li>
+                <li>T5 FIGHTERS</li>
+                <li>RALLY AND GARRISON PLAYERS</li>
+            </ul>
+          </div>
       </div>
     </div>
   </div>
@@ -282,7 +289,7 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       
-      // --- MODAL LOGIC (for both modals) ---
+      // --- MODAL LOGIC ---
       const statsModal = document.getElementById('stats-modal');
       const migrationModal = document.getElementById('migration-modal');
       const openStatsBtn = document.getElementById('open-stats-modal');
@@ -290,28 +297,15 @@
       
       const tableContainer = document.getElementById('csv-table-container');
 
-      // Generic function to open a modal
-      const openModal = (modal) => {
-          modal.classList.add('is-open');
-      };
+      const openModal = (modal) => modal.classList.add('is-open');
+      const closeModal = (modal) => modal.classList.remove('is-open');
 
-      // Generic function to close a modal
-      const closeModal = (modal) => {
-          modal.classList.remove('is-open');
-      };
-
-      // Stats Modal
-      openStatsBtn.addEventListener('click', () => {
-        openModal(statsModal);
-        loadCSV();
-      });
+      openStatsBtn.addEventListener('click', () => { openModal(statsModal); loadCSV(); });
       statsModal.querySelector('.close-button').addEventListener('click', () => closeModal(statsModal));
 
-      // Migration Modal
       openMigrationBtn.addEventListener('click', () => openModal(migrationModal));
       migrationModal.querySelector('.close-button').addEventListener('click', () => closeModal(migrationModal));
 
-      // Close modals by clicking outside or pressing Escape
       window.addEventListener('click', (e) => {
         if (e.target === statsModal) closeModal(statsModal);
         if (e.target === migrationModal) closeModal(migrationModal);
