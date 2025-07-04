@@ -123,34 +123,54 @@
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     
+    /* === TABLET RESPONSIVE DESIGN (up to 850px) === */
     @media (max-width: 850px) {
       .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; z-index: 1001; }
       .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 60%; flex-direction: column; justify-content: center; background: var(--card-bg); transition: right 0.4s ease-in-out; }
       .nav-links.nav-active { right: 0; }
       .hero-content h1 { font-size: 3rem; }
-      h2.section-title { font-size: 2.2rem; }
+      h2.section-title { font-size: 2.5rem; }
 
-      /* ### NEW MOBILE LAYOUT RULES ### */
-      .card-grid {
-        grid-template-columns: 1fr; /* Default to single column */
-      }
-      /* 2-1 layout for About Us and Stats */
+      /* Custom mobile grids for tablet size */
       #about .card-grid,
       #highlights .card-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        gap: 20px;
       }
       #about .card:last-child,
       #highlights .card:last-child {
-        grid-column: 1 / -1; /* Span full width */
-        max-width: 80%;
-        justify-self: center; /* Center the card in the grid area */
+        grid-column: 1 / -1; 
+        max-width: 90%;
+        justify-self: center;
       }
-      /* 2x3 layout for Council */
       #council .card-grid {
         grid-template-columns: 1fr 1fr;
         gap: 20px;
       }
+    }
+
+    /* === PHONE RESPONSIVE DESIGN (up to 600px) === */
+    @media (max-width: 600px) {
+      h2.section-title { font-size: 2rem; }
+      .container { padding: 60px 15px; } /* Less horizontal padding */
+      .card { padding: 25px 20px; }
+
+      /* Revert all grids to a single, spacious column on phones */
+      #about .card-grid,
+      #highlights .card-grid,
+      #council .card-grid {
+        grid-template-columns: 1fr;
+        gap: 25px; /* Give more vertical space when stacked */
+      }
+
+      /* Reset the special rules for the centered cards */
+      #about .card:last-child,
+      #highlights .card:last-child {
+        grid-column: auto; /* Reset */
+        max-width: 100%; /* Reset */
+      }
+      
+      #highlights .card p { font-size: 2rem; }
     }
   </style>
 </head>
