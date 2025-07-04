@@ -104,26 +104,32 @@
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
     .modal.is-open { display: flex; }
     .modal-content {
-        background-color: var(--card-bg); padding: 20px; border: 1px solid #555;
-        border-radius: 10px; width: 90%; max-width: 1200px; position: relative;
+        background-color: var(--card-bg); padding: 40px; border: 1px solid #555;
+        border-radius: 10px; width: 90%; max-width: 900px; position: relative;
         animation: zoomIn 0.3s ease-out; max-height: 80vh; display: flex; flex-direction: column;
     }
-    .close-button { color: #aaa; position: absolute; top: 10px; right: 25px; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close-button { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
     .close-button:hover, .close-button:focus { color: var(--gold); }
     
-    .csv-table-container { overflow: auto; }
+    .table-container { overflow: auto; }
     .csv-table { width: 100%; border-collapse: collapse; }
     .csv-table th, .csv-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #444; }
     .csv-table th { background-color: var(--gold); color: var(--dark-bg); font-family: 'Poppins', sans-serif; }
     .csv-table tbody tr:nth-of-type(even) { background-color: #2a2a2a; }
     .csv-table tbody tr:hover { background-color: #3a3a3a; }
 
+    /* NEW: Styles for Migration Info Modal */
+    .migration-content h2 { font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 10px; }
+    .migration-content h3 { font-size: 1.5rem; text-align: center; margin-bottom: 30px; letter-spacing: 1px; }
+    .migration-content ul { list-style: none; padding-left: 0; margin-bottom: 30px; }
+    .migration-content li { padding: 8px 0; border-bottom: 1px solid #333; }
+    .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; }
+
     @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     footer { background: #111; color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9rem; border-top: 1px solid #333; }
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     
-    /* === TABLET RESPONSIVE DESIGN (up to 850px) === */
     @media (max-width: 850px) {
       .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; z-index: 1001; }
       .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; flex-direction: column; justify-content: center; background: var(--card-bg); transition: right 0.4s ease-in-out; }
@@ -131,25 +137,10 @@
       .hero-content h1 { font-size: 3rem; }
       h2.section-title { font-size: 2.5rem; }
 
-      /* Custom mobile grids for tablet size */
-      #about .card-grid,
-      #highlights .card-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-      #about .card:last-child,
-      #highlights .card:last-child {
-        grid-column: 1 / -1; 
-        max-width: 90%;
-        justify-self: center;
-      }
-      #council .card-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
+      #about .card-grid, #highlights .card-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+      #about .card:last-child, #highlights .card:last-child { grid-column: 1 / -1; max-width: 90%; justify-self: center; }
+      #council .card-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
     }
-
-    /* === PHONE RESPONSIVE DESIGN (up to 600px) === */
     @media (max-width: 600px) {
       .container { padding: 60px 15px; }
       .card { padding: 20px 15px; }
@@ -222,18 +213,49 @@
       <h2 class="section-title">Ready to Forge a Legend?</h2>
       <p style="max-width:600px; margin:-20px auto 30px auto; text-align:center;">We are recruiting active, committed players eager to grow and dominate. If you have team spirit and a thirst for victory, your place is here.</p>
       <div style="text-align:center;">
-        <a href="https://discord.gg/your_recruitment_link" class="discord-button" style="margin-right: 15px; background: #5865F2;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
-        <a href="https://discord.gg/your_migration_link" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</a>
+        <a href="https://discord.gg/EHjcnhf8K7" target="_blank" class="discord-button" style="margin-right: 15px; background: #5865F2;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
+        <button id="open-migration-modal" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</button>
       </div>
     </section>
   </main>
   
   <footer><p>Page created by and for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
 
-  <div id="stats-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div id="csv-table-container" class="csv-table-container"><p>Loading stats...</p></div></div></div>
+  <!-- Stats Modal -->
+  <div id="stats-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div id="csv-table-container" class="table-container"><p>Loading stats...</p></div></div></div>
+  
+  <!-- NEW: Migration Modal -->
+  <div id="migration-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">×</span>
+      <div class="migration-content">
+        <h2>MIGRATION</h2>
+        <h3>SANDSEY<br>KINGDOM 3558</h3>
+        <ul>
+          <li>C SEED</li>
+          <li>COUNCIL LEAD KINGDOM</li>
+          <li>DATA COLLECTION</li>
+          <li>KVK RECORD OF 3-1 (KVK 4 top 2 DKP over all KDs)</li>
+          <li>SWEET 16 LAST OSIRIS LEAGUE</li>
+          <li>FIXED MGE OUTSIDE OF KVK, FREE FOR ALL DURING KVK (MOSTLY)</li>
+          <li>1 MAIN ALLIANCES WITH 2 OTHER MAX TECH SHELLS</li>
+          <li>KVK-DRIVEN KINGDOM</li>
+          <li>DEADWEIGHT CLEARING AFTER EACH KVK</li>
+          <li>TITLE BOT</li>
+        </ul>
+        <h3>WHAT ARE WE LOOKING FOR?</h3>
+        <ul>
+            <li>T4 FIGHTERS</li>
+            <li>T5 FIGHTERS</li>
+            <li>RALLY AND GARRISON PLAYERS</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // --- NAV & SCROLL SCRIPTS ---
       const nav = document.querySelector('nav');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 50) { nav.classList.add('scrolled'); } 
@@ -260,57 +282,72 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       
+      // --- MODAL LOGIC (for both modals) ---
       const statsModal = document.getElementById('stats-modal');
-      const openModalBtn = document.getElementById('open-stats-modal');
-      const closeModalBtn = statsModal.querySelector('.close-button');
+      const migrationModal = document.getElementById('migration-modal');
+      const openStatsBtn = document.getElementById('open-stats-modal');
+      const openMigrationBtn = document.getElementById('open-migration-modal');
+      
       const tableContainer = document.getElementById('csv-table-container');
+
+      // Generic function to open a modal
+      const openModal = (modal) => {
+          modal.classList.add('is-open');
+      };
+
+      // Generic function to close a modal
+      const closeModal = (modal) => {
+          modal.classList.remove('is-open');
+      };
+
+      // Stats Modal
+      openStatsBtn.addEventListener('click', () => {
+        openModal(statsModal);
+        loadCSV();
+      });
+      statsModal.querySelector('.close-button').addEventListener('click', () => closeModal(statsModal));
+
+      // Migration Modal
+      openMigrationBtn.addEventListener('click', () => openModal(migrationModal));
+      migrationModal.querySelector('.close-button').addEventListener('click', () => closeModal(migrationModal));
+
+      // Close modals by clicking outside or pressing Escape
+      window.addEventListener('click', (e) => {
+        if (e.target === statsModal) closeModal(statsModal);
+        if (e.target === migrationModal) closeModal(migrationModal);
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (statsModal.classList.contains('is-open')) closeModal(statsModal);
+          if (migrationModal.classList.contains('is-open')) closeModal(migrationModal);
+        }
+      });
 
       async function loadCSV() {
         const csvUrl = 'https://raw.githubusercontent.com/nodyyyyy/rok-website-files/main/stats.csv';
-        
         tableContainer.innerHTML = '<p>Loading stats...</p>';
-
         try {
           const response = await fetch(csvUrl);
           if (!response.ok) { throw new Error(`Network response was not ok: ${response.statusText}`); }
           const data = await response.text();
-          
           const rows = data.trim().split('\n');
           const headers = rows.shift().split(',');
-
           let tableHTML = '<table class="csv-table"><thead><tr>';
           headers.forEach(header => { tableHTML += `<th>${header.trim()}</th>`; });
           tableHTML += '</tr></thead><tbody>';
-          
           rows.forEach(row => {
             tableHTML += '<tr>';
             const columns = row.split(',');
             columns.forEach(column => { tableHTML += `<td>${column.trim()}</td>`; });
             tableHTML += '</tr>';
           });
-          
           tableHTML += '</tbody></table>';
           tableContainer.innerHTML = tableHTML;
-
         } catch (error) {
           console.error('Error fetching or parsing CSV:', error);
           tableContainer.innerHTML = '<p>Could not load stats. Please try again later.</p>';
         }
       }
-
-      const openModal = () => {
-        statsModal.classList.add('is-open');
-        loadCSV();
-      };
-      const closeModal = () => {
-        statsModal.classList.remove('is-open');
-        tableContainer.innerHTML = '';
-      };
-
-      openModalBtn.addEventListener('click', openModal);
-      closeModalBtn.addEventListener('click', closeModal);
-      window.addEventListener('click', e => { if (e.target === statsModal) closeModal(); });
-      window.addEventListener('keydown', e => { if (e.key === 'Escape' && statsModal.classList.contains('is-open')) closeModal(); });
     });
   </script>
 
