@@ -26,6 +26,10 @@
       background-color: var(--dark-bg);
       color: var(--text-light);
       line-height: 1.7;
+      transition: background-color 0.3s;
+    }
+    body.nav-open {
+      overflow: hidden; /* Prevents scrolling when mobile nav is open */
     }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
@@ -67,7 +71,7 @@
       transition: background-color 0.3s, transform 0.3s;
     }
     .nav-cta a:hover { color: var(--dark-bg); background-color: #fff; transform: scale(1.05); }
-    .nav-toggle { display: none; }
+    .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; z-index: 1001; }
 
     .angled-divider { position: relative; height: 100px; background-color: var(--dark-bg); overflow: hidden; }
     .angled-divider::after {
@@ -100,7 +104,11 @@
     #highlights .card { background: transparent; border: none; }
     #highlights .card p { font-size: 2.5rem; font-weight: 700; color: var(--gold); }
     #highlights .card h3 { font-size: 1.2rem; color: var(--text-light); }
-    
+
+    .join-buttons { display: flex; justify-content: center; gap: 15px; }
+    .join-buttons a { flex-grow: 1; max-width: 250px; }
+    .discord-button { background: #5865F2; }
+
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
     .modal.is-open { display: flex; }
     .modal-content {
@@ -123,12 +131,38 @@
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     
+    /* --- RESPONSIVE DESIGN ENHANCEMENTS --- */
     @media (max-width: 850px) {
-      .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; z-index: 1001; }
-      .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 60%; flex-direction: column; justify-content: center; background: var(--card-bg); transition: right 0.4s ease-in-out; }
-      .nav-links.nav-active { right: 0; }
-      .hero-content h1 { font-size: 3rem; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(10px);
+        transition: right 0.4s ease-in-out;
+      }
+      .nav-links.nav-active {
+        right: 0;
+      }
+      .nav-links a { font-size: 1.2rem; }
+      
+      .hero-content h1 { font-size: 3.2rem; }
+      .hero-content p { font-size: 1.1rem; }
       h2.section-title { font-size: 2.2rem; }
+      .container { padding: 60px 20px; }
+
+      #highlights .card-grid { grid-template-columns: 1fr; }
+      #highlights .card p { font-size: 2rem; }
+
+      .join-buttons { flex-direction: column; align-items: center; }
+      .join-buttons a { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -192,8 +226,8 @@
     <section id="join" class="container fade-in">
       <h2 class="section-title">Ready to Forge a Legend?</h2>
       <p style="max-width:600px; margin:-20px auto 30px auto; text-align:center;">We are recruiting active, committed players eager to grow and dominate. If you have team spirit and a thirst for victory, your place is here.</p>
-      <div style="text-align:center;">
-        <a href="https://discord.gg/your_recruitment_link" class="discord-button" style="margin-right: 15px; background: #5865F2;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
+      <div class="join-buttons">
+        <a href="https://discord.gg/your_recruitment_link" class="stats-button discord-button"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
         <a href="https://discord.gg/your_migration_link" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</a>
       </div>
     </section>
@@ -210,9 +244,15 @@
         if (window.scrollY > 50) { nav.classList.add('scrolled'); } 
         else { nav.classList.remove('scrolled'); }
       });
+      
       const navToggle = document.querySelector('.nav-toggle');
       const navLinks = document.querySelector('.nav-links');
-      navToggle.addEventListener('click', () => { navLinks.classList.toggle('nav-active'); });
+      const body = document.body;
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-active');
+        body.classList.toggle('nav-open');
+      });
+
       const sections = document.querySelectorAll('main section');
       const navLi = document.querySelectorAll('.nav-links a:not(.nav-cta)');
       window.addEventListener('scroll', () => {
@@ -238,31 +278,24 @@
 
       async function loadCSV() {
         const csvUrl = 'https://raw.githubusercontent.com/nodyyyyy/rok-website-files/main/stats.csv';
-        
         tableContainer.innerHTML = '<p>Loading stats...</p>';
-
         try {
           const response = await fetch(csvUrl);
           if (!response.ok) { throw new Error(`Network response was not ok: ${response.statusText}`); }
           const data = await response.text();
-          
           const rows = data.trim().split('\n');
           const headers = rows.shift().split(',');
-
           let tableHTML = '<table class="csv-table"><thead><tr>';
           headers.forEach(header => { tableHTML += `<th>${header.trim()}</th>`; });
           tableHTML += '</tr></thead><tbody>';
-          
           rows.forEach(row => {
             tableHTML += '<tr>';
             const columns = row.split(',');
             columns.forEach(column => { tableHTML += `<td>${column.trim()}</td>`; });
             tableHTML += '</tr>';
           });
-          
           tableHTML += '</tbody></table>';
           tableContainer.innerHTML = tableHTML;
-
         } catch (error) {
           console.error('Error fetching or parsing CSV:', error);
           tableContainer.innerHTML = '<p>Could not load stats. Please try again later.</p>';
