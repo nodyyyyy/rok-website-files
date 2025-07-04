@@ -26,7 +26,6 @@
       background-color: var(--dark-bg);
       color: var(--text-light);
       line-height: 1.7;
-      transition: background-color 0.3s;
     }
     body.nav-open {
       overflow: hidden; /* Prevents scrolling when mobile nav is open */
@@ -71,7 +70,7 @@
       transition: background-color 0.3s, transform 0.3s;
     }
     .nav-cta a:hover { color: var(--dark-bg); background-color: #fff; transform: scale(1.05); }
-    .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; z-index: 1001; }
+    .nav-toggle, .close-nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; z-index: 1001; }
 
     .angled-divider { position: relative; height: 100px; background-color: var(--dark-bg); overflow: hidden; }
     .angled-divider::after {
@@ -104,9 +103,9 @@
     #highlights .card { background: transparent; border: none; }
     #highlights .card p { font-size: 2.5rem; font-weight: 700; color: var(--gold); }
     #highlights .card h3 { font-size: 1.2rem; color: var(--text-light); }
-
-    .join-buttons { display: flex; justify-content: center; gap: 15px; }
-    .join-buttons a { flex-grow: 1; max-width: 250px; }
+    
+    .join-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .join-buttons a { flex-grow: 1; max-width: 250px; text-align: center; }
     .discord-button { background: #5865F2; }
 
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
@@ -136,10 +135,8 @@
       .nav-toggle { display: block; }
       .nav-links {
         position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 70%;
+        top: 0; right: -100%; /* Start off-screen */
+        height: 100%; width: 100%; /* Full screen overlay */
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -148,21 +145,26 @@
         backdrop-filter: blur(10px);
         transition: right 0.4s ease-in-out;
       }
-      .nav-links.nav-active {
-        right: 0;
+      .nav-links.nav-active { right: 0; }
+      .nav-links a { font-size: 1.4rem; }
+      .close-nav-toggle {
+        display: block; position: absolute; top: 25px; right: 25px; font-size: 2.2rem;
       }
-      .nav-links a { font-size: 1.2rem; }
       
+      header { min-height: 90vh; }
       .hero-content h1 { font-size: 3.2rem; }
-      .hero-content p { font-size: 1.1rem; }
+      .hero-content p { font-size: 1.1rem; padding: 0 10px; }
       h2.section-title { font-size: 2.2rem; }
       .container { padding: 60px 20px; }
-
-      #highlights .card-grid { grid-template-columns: 1fr; }
+      
+      .card { padding: 25px; }
+      #highlights .card-grid { grid-template-columns: 1fr; gap: 10px; }
+      #highlights .card { padding: 15px; }
       #highlights .card p { font-size: 2rem; }
-
-      .join-buttons { flex-direction: column; align-items: center; }
-      .join-buttons a { width: 100%; text-align: center; }
+      
+      #council .card img { width: 100px; height: 100px; }
+      
+      .join-buttons { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
@@ -171,6 +173,8 @@
     <nav>
       <div class="nav-logo"><a href="#">Kingdom 3558</a></div>
       <div class="nav-links">
+        <!-- Close button for the mobile menu -->
+        <button class="close-nav-toggle">×</button>
         <a href="#about" class="active">About Us</a>
         <a href="#council">Council</a>
         <a href="#join" class="nav-cta">Join Us</a>
@@ -247,10 +251,23 @@
       
       const navToggle = document.querySelector('.nav-toggle');
       const navLinks = document.querySelector('.nav-links');
+      const closeNavToggle = document.querySelector('.close-nav-toggle');
       const body = document.body;
-      navToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        body.classList.toggle('nav-open');
+
+      const openMobileNav = () => {
+        navLinks.classList.add('nav-active');
+        body.classList.add('nav-open');
+      };
+      const closeMobileNav = () => {
+        navLinks.classList.remove('nav-active');
+        body.classList.remove('nav-open');
+      };
+
+      navToggle.addEventListener('click', openMobileNav);
+      closeNavToggle.addEventListener('click', closeMobileNav);
+      // Close nav when a link is clicked
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobileNav);
       });
 
       const sections = document.querySelectorAll('main section');
@@ -283,7 +300,8 @@
           const response = await fetch(csvUrl);
           if (!response.ok) { throw new Error(`Network response was not ok: ${response.statusText}`); }
           const data = await response.text();
-          const rows = data.trim().split('\n');
+          const rows = data.trim().split('\n').filter(row => row); // Added filter for empty rows
+          if (rows.length === 0) { tableContainer.innerHTML = '<p>No stats data found.</p>'; return; }
           const headers = rows.shift().split(',');
           let tableHTML = '<table class="csv-table"><thead><tr>';
           headers.forEach(header => { tableHTML += `<th>${header.trim()}</th>`; });
@@ -302,14 +320,8 @@
         }
       }
 
-      const openModal = () => {
-        statsModal.classList.add('is-open');
-        loadCSV();
-      };
-      const closeModal = () => {
-        statsModal.classList.remove('is-open');
-        tableContainer.innerHTML = '';
-      };
+      const openModal = () => { statsModal.classList.add('is-open'); loadCSV(); };
+      const closeModal = () => { statsModal.classList.remove('is-open'); tableContainer.innerHTML = ''; };
 
       openModalBtn.addEventListener('click', openModal);
       closeModalBtn.addEventListener('click', closeModal);
