@@ -3,8 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kingdom 3558 - Rise of Kingdoms</title>
+  <title>Kingdom 3558</title>
   
+  <!-- === SUGGESTION 1: PROFESSIONALISM & SEO TAGS (START) === -->
+
+  <!-- SEO Meta Description -->
+  <meta name="description" content="Join Kingdom 3558! We are a united, KVK-focused kingdom recruiting active T4 and T5 fighters. Check our stats and join our Discord!">
+
+  <!-- Favicon (You must upload favicon.ico to your repository) -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Open Graph / Social Media Tags (for sharing on Discord, etc.) -->
+  <meta property="og:title" content="Kingdom 3558">
+  <meta property="og:description" content="United in glory, forging legends on the battlefield. Join our KVK-focused kingdom!">
+  <meta property="og:image" content="https://i.postimg.cc/HxNsMT7Q/temp-Image-Qja-I1u.avif">
+  <meta property="og:url" content="https://kd3558.netlify.app/"> <!-- !!! IMPORTANT: REPLACE WITH YOUR LIVE URL !!! -->
+  <meta property="og:type" content="website">
+
+  <!-- === SUGGESTION 1 (END) === -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,7 +38,12 @@
       --text-muted: #ccc;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    
+    /* --- SUGGESTION 3: SMOOTH SCROLLING --- */
+    html { 
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* Prevents content hiding under the fixed nav */
+    }
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--dark-bg);
@@ -33,7 +55,6 @@
     h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 700; }
     h2.section-title { text-align: center; font-size: 2.8rem; color: var(--gold); margin-bottom: 50px; letter-spacing: 1px; }
 
-    /* --- SUGGESTION 2: PARALLAX HEADER --- */
     header {
       position: relative;
       background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.postimg.cc/HxNsMT7Q/temp-Image-Qja-I1u.avif') center center no-repeat;
@@ -45,7 +66,7 @@
       align-items: center; 
       text-align: center; 
       padding: 20px;
-      background-attachment: fixed; /* This creates the parallax effect */
+      background-attachment: fixed;
     }
     .hero-content h1 { font-size: 4.5rem; color: var(--gold); text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
     .hero-content p { font-size: 1.3rem; color: var(--text-light); text-shadow: 1px 1px 4px rgba(0,0,0,0.7); max-width: 600px; margin-top: 10px; }
@@ -89,7 +110,6 @@
 
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
     
-    /* --- SUGGESTION 1: ANIMATED GRADIENT BORDER --- */
     .card {
       background: var(--card-inner-bg);
       border: 1px solid #444; 
@@ -97,11 +117,10 @@
       padding: 30px;
       text-align: center; 
       transition: transform 0.3s, box-shadow 0.3s;
-      position: relative; /* Needed for the pseudo-element */
+      position: relative;
       z-index: 1;
-      overflow: hidden; /* Hides the border when not hovered */
+      overflow: hidden;
     }
-    /* This creates the gradient border element */
     .card::before {
       content: '';
       position: absolute;
@@ -117,14 +136,13 @@
     .card:hover::before {
       opacity: 1;
     }
-    /* This creates the inner background to cover the gradient, revealing only the border */
     .card::after {
       content: '';
       position: absolute;
       top: 2px; left: 2px;
       width: calc(100% - 4px);
       height: calc(100% - 4px);
-      background: var(--card-inner-bg); /* Match this to the card background */
+      background: var(--card-inner-bg);
       border-radius: 8px;
       z-index: -1;
     }
@@ -143,8 +161,8 @@
     .stats-button:hover { background-color: #fff; transform: scale(1.05); }
     
     #highlights .card { background: transparent; border: none; }
-    #highlights .card:hover { box-shadow: none; } /* Disable special hover for stat cards */
-    #highlights .card::before, #highlights .card::after { display: none; } /* Disable border effect for stat cards */
+    #highlights .card:hover { box-shadow: none; }
+    #highlights .card::before, #highlights .card::after { display: none; }
     #highlights .card p { font-size: 2.5rem; font-weight: 700; color: var(--gold); }
     #highlights .card h3 { font-size: 1.2rem; color: var(--text-light); }
     
@@ -152,7 +170,6 @@
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     
-    /* --- SUGGESTION 3: PULSING CTA BUTTON --- */
     @keyframes pulse {
       0% {
         transform: scale(1);
@@ -183,7 +200,6 @@
       #council .card-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
     }
     @media (max-width: 600px) {
-      /* Disable parallax on mobile for performance and compatibility */
       header {
         background-attachment: scroll;
       }
@@ -264,7 +280,7 @@
     </section>
   </main>
   
-  <footer><p>Page created by and for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
+  <footer><p>Page created by Nody for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
