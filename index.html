@@ -5,36 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kingdom 3558 - Rise of Kingdoms</title>
   
-  <!-- === PROFESSIONALISM & SEO TAGS (START) === -->
-
-  <!-- SEO Meta Description -->
   <meta name="description" content="Join Kingdom 3558! We are a united, KVK-focused kingdom recruiting active T4 and T5 fighters. Check our stats and join our Discord!">
-
-  <!-- FINAL POLISH: Comprehensive Favicon Links -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-  <!-- Open Graph / Social Media Tags (for sharing on Discord, etc.) -->
   <meta property="og:title" content="Kingdom 3558 - Rise of Kingdoms">
   <meta property="og:description" content="United in glory, forging legends on the battlefield. Join our KVK-focused kingdom!">
   <meta property="og:image" content="https://i.postimg.cc/HxNsMT7Q/temp-Image-Qja-I1u.avif">
   <meta property="og:url" content="https://kd3558.netlify.app/">
   <meta property="og:type" content="website">
 
-  <!-- === (END) === -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <style>
     :root {
       --gold: #FFD700;
+      --dark-gold: #B8860B;
       --dark-bg: #0d0d0d;
       --card-bg: #1a1a1a;
       --card-inner-bg: #252525;
@@ -45,18 +36,61 @@
     
     html { 
       scroll-behavior: smooth;
-      scroll-padding-top: 80px; /* Prevents content hiding under the fixed nav */
+      scroll-padding-top: 80px;
     }
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--dark-bg);
       color: var(--text-light);
       line-height: 1.7;
+      /* --- SUGGESTION 3: SUBTLE TEXTURE --- */
+      background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
     }
+
+    /* --- SUGGESTION 1: PRELOADER CSS --- */
+    .preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--dark-bg);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.75s ease, visibility 0.75s ease;
+      visibility: visible;
+      opacity: 1;
+    }
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #444;
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
 
     .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
     h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 700; }
-    h2.section-title { text-align: center; font-size: 2.8rem; color: var(--gold); margin-bottom: 50px; letter-spacing: 1px; }
+    
+    /* --- SUGGESTION 3: GRADIENT TEXT --- */
+    h2.section-title { 
+      text-align: center; 
+      font-size: 2.8rem; 
+      margin-bottom: 50px; 
+      letter-spacing: 1px; 
+      background: linear-gradient(to bottom, var(--gold), var(--dark-gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent; /* Fallback */
+    }
 
     header {
       position: relative;
@@ -102,14 +136,50 @@
     .nav-cta a:hover { color: var(--dark-bg); background-color: #fff; transform: scale(1.05); }
     .nav-toggle { display: none; }
 
-    .angled-divider { position: relative; height: 100px; background-color: var(--dark-bg); overflow: hidden; }
-    .angled-divider::after {
-        content: ''; position: absolute; width: 150%; height: 100px;
-        background-color: var(--card-bg); left: -25%; top: 30px; transform: rotate(-2deg);
+    /* --- SUGGESTION 2: SVG DIVIDERS --- */
+    section { 
+      background-color: var(--card-bg); 
+      position: relative; /* Crucial for positioning the SVG dividers */
     }
-    
-    section { background-color: var(--card-bg); }
     section#about { background-color: var(--dark-bg); }
+
+    .custom-shape-divider-bottom-1 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+    }
+    .custom-shape-divider-bottom-1 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 110px;
+    }
+    .custom-shape-divider-bottom-1 .shape-fill {
+        fill: var(--card-bg);
+    }
+
+    .custom-shape-divider-top-1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+    }
+    .custom-shape-divider-top-1 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 80px;
+    }
+    .custom-shape-divider-top-1 .shape-fill {
+        fill: var(--dark-bg);
+    }
+
 
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
     
@@ -136,9 +206,7 @@
       transition: opacity 0.4s ease;
     }
     .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2); }
-    .card:hover::before {
-      opacity: 1;
-    }
+    .card:hover::before { opacity: 1; }
     .card::after {
       content: '';
       position: absolute;
@@ -174,22 +242,11 @@
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     
     @keyframes pulse {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
-      }
-      70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 10px 20px rgba(255, 215, 0, 0);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-      }
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 10px 20px rgba(255, 215, 0, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
     }
-    .discord-button {
-      animation: pulse 2.5s infinite;
-    }
+    .discord-button { animation: pulse 2.5s infinite; }
 
     @media (max-width: 850px) {
       .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; z-index: 1001; }
@@ -197,26 +254,25 @@
       .nav-links.nav-active { right: 0; }
       .hero-content h1 { font-size: 3rem; }
       h2.section-title { font-size: 2.5rem; }
-
-      #about .card-grid, #highlights .card-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-      #about .card:last-child, #highlights .card:last-child { grid-column: 1 / -1; max-width: 90%; justify-self: center; }
-      #council .card-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
-      header {
-        background-attachment: scroll;
-      }
+      header { background-attachment: scroll; }
       .container { padding: 60px 15px; }
       .card { padding: 20px 15px; }
       h2.section-title { font-size: 2.2rem; }
       .card h3 { font-size: 1.1rem; }
       .card .icon { font-size: 2.5rem; }
-      
       #highlights .card p { font-size: 2rem; }
+      .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+
+  <!-- PRELOADER HTML -->
+  <div class="preloader"><div class="spinner"></div></div>
+
   <header>
     <nav>
       <div class="nav-logo"><a href="#">Kingdom 3558</a></div>
@@ -241,24 +297,35 @@
             <div class="card"><i class="icon fa-solid fa-users"></i><h3>United Community</h3><p>Supportive and friendly group of players dedicated to building and growing together.</p></div>
             <div class="card"><i class="icon fa-solid fa-desktop"></i><h3>Data Collection</h3><p>Our leaders and officers meticulously track contributions to ensure fairness and equal opportunities for all members.</p></div>
         </div>
+        <!-- SVG DIVIDER 1 -->
+        <div class="custom-shape-divider-bottom-1">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
     </section>
 
-    <div class="angled-divider"></div>
-
-    <section id="highlights" class="container fade-in">
-      <h2 class="section-title">Kingdom Stats</h2>
-      <div class="card-grid">
-        <div class="card"><i class="icon fa-solid fa-star"></i><h3>Total Power</h3><p>9.04 B</p></div>
-        <div class="card"><i class="icon fa-solid fa-trophy"></i><h3>Total KP</h3><p>128.41 B</p></div>
-        <div class="card"><i class="icon fa-solid fa-book-dead"></i><h3>Deaths</h3><p>991.19 M</p></div>
-      </div>
-      <div style="text-align:center; margin-top: 40px;">
-        <a href="stats.html" class="stats-button"><i class="fa-solid fa-chart-line"></i> View Detailed Stats</a>
-      </div>
+    <!-- The container for this section needed to be removed for the top divider to work seamlessly -->
+    <section id="highlights" class="fade-in">
+        <!-- SVG DIVIDER 2 -->
+        <div class="custom-shape-divider-top-1">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.3-37.34,70.15-4.06,136.34,19.91,204.17,35.87,67.69,15.95,134.09,32.54,200.95,39.64,66.85,7.09,134.45-5.25,202.8-21.42L1200,0H0Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="container" style="padding-top: 120px;">
+          <h2 class="section-title">Kingdom Stats</h2>
+          <div class="card-grid">
+            <div class="card"><i class="icon fa-solid fa-star"></i><h3>Total Power</h3><p>9.04 B</p></div>
+            <div class="card"><i class="icon fa-solid fa-trophy"></i><h3>Total KP</h3><p>128.41 B</p></div>
+            <div class="card"><i class="icon fa-solid fa-book-dead"></i><h3>Deaths</h3><p>991.19 M</p></div>
+          </div>
+          <div style="text-align:center; margin-top: 40px;">
+            <a href="stats.html" class="stats-button"><i class="fa-solid fa-chart-line"></i> View Detailed Stats</a>
+          </div>
+        </div>
     </section>
     
-    <div class="angled-divider"></div>
-
     <section id="council" class="container fade-in">
         <h2 class="section-title">Meet our Council</h2>
         <div class="card-grid">
@@ -270,8 +337,6 @@
             <div class="card"><img src="https://via.placeholder.com/150/0d0d0d/FFD700?text=R4" alt="Council Member 6"><h3>Leader Name</h3></div>
         </div>
     </section>
-
-    <div class="angled-divider"></div>
 
     <section id="join" class="container fade-in">
       <h2 class="section-title">Ready to Forge a Legend?</h2>
@@ -286,6 +351,12 @@
   <footer><p>Page created by Nody for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
 
   <script>
+    // --- PRELOADER SCRIPT ---
+    window.onload = function() {
+      const preloader = document.querySelector('.preloader');
+      preloader.classList.add('hidden');
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       // --- NAV & SCROLL SCRIPTS ---
       const nav = document.querySelector('nav');
