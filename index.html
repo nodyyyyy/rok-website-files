@@ -101,33 +101,6 @@
     #highlights .card p { font-size: 2.5rem; font-weight: 700; color: var(--gold); }
     #highlights .card h3 { font-size: 1.2rem; color: var(--text-light); }
     
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
-    .modal.is-open { display: flex; }
-    .modal-content {
-        background-color: var(--card-bg); padding: 40px; border: 1px solid #555;
-        border-radius: 10px; width: 90%; max-width: 900px; position: relative;
-        animation: zoomIn 0.3s ease-out; max-height: 80vh; display: flex; flex-direction: column;
-    }
-    .modal-body { overflow-y: auto; } /* Allow content inside to scroll */
-    .close-button { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
-    .close-button:hover, .close-button:focus { color: var(--gold); }
-    
-    .table-container { overflow: auto; }
-    .csv-table { width: 100%; border-collapse: collapse; }
-    .csv-table th, .csv-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #444; }
-    .csv-table th { background-color: var(--gold); color: var(--dark-bg); font-family: 'Poppins', sans-serif; }
-    .csv-table tbody tr:nth-of-type(even) { background-color: #2a2a2a; }
-    .csv-table tbody tr:hover { background-color: #3a3a3a; }
-
-    /* ### MIGRATION MODAL STYLES REFINED ### */
-    .migration-content .main-title { font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 5px; }
-    .migration-content .sub-title { font-size: 1.5rem; text-align: center; margin-bottom: 25px; letter-spacing: 1px; color: var(--text-muted); }
-    .migration-content .list-heading { font-size: 1.4rem; color: var(--gold); margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 8px; }
-    .migration-content ul { list-style: none; padding-left: 0; }
-    .migration-content li { padding-left: 10px; margin-bottom: 12px; }
-    .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; margin-left: -10px; }
-
-    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     footer { background: #111; color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9rem; border-top: 1px solid #333; }
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
     .fade-in.is-visible { opacity: 1; transform: translateY(0); }
@@ -191,7 +164,7 @@
         <div class="card"><i class="icon fa-solid fa-book-dead"></i><h3>Deaths</h3><p>991.19 M</p></div>
       </div>
       <div style="text-align:center; margin-top: 40px;">
-        <button id="open-stats-modal" class="stats-button"><i class="fa-solid fa-chart-line"></i> View Detailed Stats</button>
+        <a href="stats.html" class="stats-button"><i class="fa-solid fa-chart-line"></i> View Detailed Stats</a>
       </div>
     </section>
     
@@ -216,49 +189,12 @@
       <p style="max-width:600px; margin:-20px auto 30px auto; text-align:center;">We are recruiting active, committed players eager to grow and dominate. If you have team spirit and a thirst for victory, your place is here.</p>
       <div style="text-align:center;">
         <a href="https://discord.gg/EHjcnhf8K7" target="_blank" rel="noopener noreferrer" class="stats-button discord-button" style="margin-right: 15px;"><i class="fa-brands fa-discord"></i> Join Recruitment</a>
-        <button id="open-migration-modal" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</button>
+        <a href="migration.html" class="stats-button" style="background-color: transparent; border: 2px solid var(--gold); color: var(--gold);"><i class="fa-solid fa-plane"></i> Migration Info</a>
       </div>
     </section>
   </main>
   
   <footer><p>Page created by and for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
-
-  <!-- Stats Modal -->
-  <div id="stats-modal" class="modal"><div class="modal-content"><span class="close-button">×</span><div id="csv-table-container" class="table-container"><p>Loading stats...</p></div></div></div>
-  
-  <!-- ### MIGRATION MODAL HTML REFINED ### -->
-  <div id="migration-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-button">×</span>
-      <div class="modal-body">
-          <div class="migration-content">
-            <h2 class="main-title">MIGRATION</h2>
-            <h3 class="sub-title">SANDSEY - KINGDOM 3558</h3>
-            
-            <h4 class="list-heading">About Our Kingdom</h4>
-            <ul>
-              <li>C SEED</li>
-              <li>COUNCIL LEAD KINGDOM</li>
-              <li>DATA COLLECTION</li>
-              <li>KVK RECORD OF 3-1 (KVK 4 top 2 DKP over all KDs)</li>
-              <li>SWEET 16 LAST OSIRIS LEAGUE</li>
-              <li>FIXED MGE OUTSIDE OF KVK, FREE FOR ALL DURING KVK (MOSTLY)</li>
-              <li>1 MAIN ALLIANCES WITH 2 OTHER MAX TECH SHELLS</li>
-              <li>KVK-DRIVEN KINGDOM</li>
-              <li>DEADWEIGHT CLEARING AFTER EACH KVK</li>
-              <li>TITLE BOT</li>
-            </ul>
-
-            <h4 class="list-heading">What We Are Looking For</h4>
-            <ul>
-                <li>T4 FIGHTERS</li>
-                <li>T5 FIGHTERS</li>
-                <li>RALLY AND GARRISON PLAYERS</li>
-            </ul>
-          </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -288,60 +224,6 @@
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
       }, { threshold: 0.1 });
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-      
-      // --- MODAL LOGIC ---
-      const statsModal = document.getElementById('stats-modal');
-      const migrationModal = document.getElementById('migration-modal');
-      const openStatsBtn = document.getElementById('open-stats-modal');
-      const openMigrationBtn = document.getElementById('open-migration-modal');
-      
-      const tableContainer = document.getElementById('csv-table-container');
-
-      const openModal = (modal) => modal.classList.add('is-open');
-      const closeModal = (modal) => modal.classList.remove('is-open');
-
-      openStatsBtn.addEventListener('click', () => { openModal(statsModal); loadCSV(); });
-      statsModal.querySelector('.close-button').addEventListener('click', () => closeModal(statsModal));
-
-      openMigrationBtn.addEventListener('click', () => openModal(migrationModal));
-      migrationModal.querySelector('.close-button').addEventListener('click', () => closeModal(migrationModal));
-
-      window.addEventListener('click', (e) => {
-        if (e.target === statsModal) closeModal(statsModal);
-        if (e.target === migrationModal) closeModal(migrationModal);
-      });
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (statsModal.classList.contains('is-open')) closeModal(statsModal);
-          if (migrationModal.classList.contains('is-open')) closeModal(migrationModal);
-        }
-      });
-
-      async function loadCSV() {
-        const csvUrl = 'https://raw.githubusercontent.com/nodyyyyy/rok-website-files/main/stats.csv';
-        tableContainer.innerHTML = '<p>Loading stats...</p>';
-        try {
-          const response = await fetch(csvUrl);
-          if (!response.ok) { throw new Error(`Network response was not ok: ${response.statusText}`); }
-          const data = await response.text();
-          const rows = data.trim().split('\n');
-          const headers = rows.shift().split(',');
-          let tableHTML = '<table class="csv-table"><thead><tr>';
-          headers.forEach(header => { tableHTML += `<th>${header.trim()}</th>`; });
-          tableHTML += '</tr></thead><tbody>';
-          rows.forEach(row => {
-            tableHTML += '<tr>';
-            const columns = row.split(',');
-            columns.forEach(column => { tableHTML += `<td>${column.trim()}</td>`; });
-            tableHTML += '</tr>';
-          });
-          tableHTML += '</tbody></table>';
-          tableContainer.innerHTML = tableHTML;
-        } catch (error) {
-          console.error('Error fetching or parsing CSV:', error);
-          tableContainer.innerHTML = '<p>Could not load stats. Please try again later.</p>';
-        }
-      }
     });
   </script>
 
