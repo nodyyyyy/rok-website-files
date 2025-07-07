@@ -64,7 +64,12 @@ header {
   justify-content: center; align-items: center; text-align: center; padding: 20px;
   background-attachment: fixed;
 }
-.hero-content h1 { font-size: 4.5rem; color: var(--gold); text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+.hero-content h1 { 
+  font-size: 4.5rem; 
+  color: var(--gold); 
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8); 
+  position: relative; /* Required for the pseudo-element */
+}
 .hero-content p { font-size: 1.3rem; color: var(--text-light); text-shadow: 1px 1px 4px rgba(0,0,0,0.7); max-width: 600px; margin-top: 10px; }
 
 nav {
@@ -92,15 +97,12 @@ nav.scrolled {
 
 /* --- LAYOUT --- */
 main { 
-  position: relative; 
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
+  position: relative; z-index: 1;
+  max-width: 1400px; margin: 0 auto;
   background-color: var(--card-bg);
 }
 section { 
-  background-color: transparent; 
-  position: relative; 
+  background-color: transparent; position: relative; 
 }
 
 /* --- CARDS --- */
@@ -126,11 +128,37 @@ section {
 .back-button { padding: 8px 18px; }
 footer { background: #111; color: var(--text-muted); text-align: center; padding: 25px; font-size: 0.9rem; border-top: 1px solid #333; position: relative; z-index: 1;}
 
-/* --- ANIMATIONS --- */
+/* --- ANIMATIONS & CINEMATIC EFFECTS --- */
 .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
 .fade-in.is-visible { opacity: 1; transform: translateY(0); }
 @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 10px 20px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 .discord-button { animation: pulse 2.5s infinite; }
+
+/* "God Rays" Effect */
+.hero-content h1::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 300%; /* Make it larger for longer rays */
+  height: 300%;
+  z-index: -1;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.2) 0%,
+    rgba(255, 215, 0, 0) 70%
+  );
+  animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.3;
+  }
+}
 
 /* --- SUB-PAGE SPECIFIC STYLES --- */
 .search-container { position: relative; margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto; }
