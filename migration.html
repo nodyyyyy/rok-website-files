@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -25,7 +24,20 @@
           background-color: var(--dark-bg);
           color: var(--text-light);
           line-height: 1.7;
+          /* Add background texture */
+          background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
         }
+
+        /* --- PARTICLE BACKGROUND STYLES --- */
+        #particles-js {
+          position: fixed;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: -1; /* Place it behind everything */
+        }
+
         .top-bar {
             background-color: var(--card-bg);
             padding: 15px 40px;
@@ -33,6 +45,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative; /* Ensure it stays on top */
+            z-index: 2;
         }
         .top-bar .logo {
             font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: 700;
@@ -49,6 +63,8 @@
             max-width: 900px; 
             margin: 0 auto; 
             padding: 50px 20px; 
+            position: relative; /* Ensure it stays on top */
+            z-index: 1;
         }
         .migration-content {
             background-color: var(--card-bg);
@@ -63,30 +79,20 @@
         .migration-content li { padding-left: 10px; margin-bottom: 12px; }
         .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; margin-left: -10px; }
 
-        /* --- MOBILE RESPONSIVE STYLES --- */
         @media (max-width: 768px) {
-          .top-bar {
-            padding: 15px 20px;
-          }
-          .container {
-            padding: 30px 15px;
-          }
-          .migration-content {
-            padding: 30px 20px; /* Reduce padding for smaller screens */
-          }
-          .migration-content .main-title {
-            font-size: 2rem;
-          }
-          .migration-content .sub-title {
-            font-size: 1.2rem;
-          }
-          .migration-content .list-heading {
-            font-size: 1.2rem;
-          }
+          .top-bar { padding: 15px 20px; }
+          .container { padding: 30px 15px; }
+          .migration-content { padding: 30px 20px; }
+          .migration-content .main-title { font-size: 2rem; }
+          .migration-content .sub-title { font-size: 1.2rem; }
+          .migration-content .list-heading { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
+
+    <div id="particles-js"></div>
+
     <header class="top-bar">
         <div class="logo">Kingdom 3558</div>
         <a href="index.html" class="back-button"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
@@ -119,5 +125,25 @@
             </ul>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            tsParticles.load("particles-js", {
+                fpsLimit: 60,
+                particles: {
+                    number: { value: 60, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffd700" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                    size: { value: 2, random: true, anim: { enable: false } },
+                    links: { enable: true, distance: 150, color: "#ffd700", opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false },
+                },
+                interactivity: { events: { onhover: { enable: false }, resize: true } },
+                retina_detect: true,
+            });
+        });
+    </script>
 </body>
 </html>
