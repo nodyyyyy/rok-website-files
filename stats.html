@@ -10,122 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
-  <style>
-    :root {
-      --gold: #FFD700;
-      --dark-bg: #0d0d0d;
-      --card-bg: #1a1a1a;
-      --text-light: #f0f0f0;
-      --text-muted: #ccc;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--dark-bg);
-      color: var(--text-light);
-      line-height: 1.7;
-      background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
-    }
-
-    #particles-js {
-      position: fixed; width: 100%; height: 100%;
-      top: 0; left: 0; z-index: -1;
-    }
-
-    .top-bar {
-      background-color: var(--card-bg); padding: 15px 40px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex;
-      justify-content: space-between; align-items: center;
-      position: relative; z-index: 2;
-    }
-    .top-bar .logo {
-        font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: 700;
-    }
-    .back-button {
-      background: var(--gold); color: var(--dark-bg); padding: 8px 18px;
-      border-radius: 5px; font-weight: 700; text-decoration: none;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-    .back-button:hover {
-      background-color: #fff; transform: scale(1.05);
-    }
-    .container { 
-        max-width: 1200px; margin: 0 auto; padding: 50px 20px; 
-        position: relative; z-index: 1;
-    }
-    .page-title { 
-      font-family: 'Cinzel', serif; font-weight: 700; text-align: center; 
-      font-size: 2.8rem; color: var(--gold); margin-bottom: 30px; letter-spacing: 1px; 
-    }
-
-    .search-container {
-      position: relative;
-      margin-bottom: 25px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .search-container .search-icon {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-    }
-    #searchInput {
-      width: 100%;
-      padding: 12px 20px 12px 45px;
-      background-color: var(--card-bg);
-      border: 1px solid #444;
-      border-radius: 8px;
-      color: var(--text-light);
-      font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-    #searchInput:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-    #searchInput::placeholder {
-      color: var(--text-muted);
-    }
-
-    .table-container { 
-      overflow-x: auto; 
-      background-color: var(--card-bg);
-      border: 1px solid #444; border-radius: 10px;
-      padding: 20px;
-    }
-    .csv-table { width: 100%; border-collapse: collapse; }
-    .csv-table th, .csv-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #444; }
-    .csv-table th { background-color: var(--gold); color: var(--dark-bg); font-family: 'Poppins', sans-serif; }
-    .csv-table tbody tr:nth-of-type(even) { background-color: #2a2a2a; }
-    .csv-table tbody tr:hover { background-color: #3a3a3a; }
-
-    @media (max-width: 768px) {
-      .top-bar { padding: 15px 20px; }
-      .container { padding: 30px 15px; }
-
-      /* --- MOBILE OPTIMIZATIONS for Search & Layout --- */
-      .page-title { 
-        font-size: 2.2rem;
-        margin-bottom: 20px; /* Tighter spacing on mobile */
-      }
-      .search-container {
-        margin-bottom: 20px;
-      }
-      #searchInput {
-        font-size: 0.9rem; /* Match font size to table content */
-        padding: 10px 15px 10px 40px; /* Reduced padding for compact look */
-      }
-      .search-container .search-icon {
-        left: 13px; /* Adjust icon position for new padding */
-      }
-
-      .table-container { padding: 10px; }
-      .csv-table th, .csv-table td { padding: 10px 8px; font-size: 0.9rem; }
-    }
-  </style>
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -152,7 +38,6 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- PARTICLE.JS CONFIG ---
       tsParticles.load("particles-js", {
         fpsLimit: 60,
         particles: {
@@ -168,7 +53,6 @@
         retina_detect: true,
       });
 
-      // --- CSV LOADING SCRIPT ---
       async function loadCSV() {
         const csvUrl = 'https://raw.githubusercontent.com/nodyyyyy/rok-website-files/main/stats.csv';
         const tableContainer = document.getElementById('csv-table-container');
@@ -202,7 +86,6 @@
           const filter = searchInput.value.toUpperCase().trim();
           const table = document.querySelector('.csv-table');
           const tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-
           for (let i = 0; i < tr.length; i++) {
             let td = tr[i].getElementsByTagName('td')[0]; 
             if (td) {
@@ -218,6 +101,5 @@
       });
     });
   </script>
-
 </body>
 </html>
