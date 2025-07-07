@@ -90,16 +90,14 @@ nav.scrolled {
 .nav-cta a:hover { color: var(--dark-bg); background-color: #fff; transform: scale(1.05); }
 .nav-toggle { display: none; }
 
-/* --- LAYOUT & DIVIDERS --- */
-/* THIS IS THE FIX: Background is now on the main content column */
+/* --- LAYOUT --- */
 main { 
   position: relative; 
   z-index: 1;
-  max-width: 1400px; /* Optional: sets a max width for the content column */
+  max-width: 1400px;
   margin: 0 auto;
   background-color: var(--card-bg);
 }
-/* Sections are now transparent to show the main background */
 section { 
   background-color: transparent; 
   position: relative; 
