@@ -10,84 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <style>
-        :root {
-          --gold: #FFD700;
-          --dark-bg: #0d0d0d;
-          --card-bg: #1a1a1a;
-          --text-light: #f0f0f0;
-          --text-muted: #ccc;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-          font-family: 'Poppins', sans-serif;
-          background-color: var(--dark-bg);
-          color: var(--text-light);
-          line-height: 1.7;
-          /* Add background texture */
-          background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
-        }
-
-        /* --- PARTICLE BACKGROUND STYLES --- */
-        #particles-js {
-          position: fixed;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          z-index: -1; /* Place it behind everything */
-        }
-
-        .top-bar {
-            background-color: var(--card-bg);
-            padding: 15px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative; /* Ensure it stays on top */
-            z-index: 2;
-        }
-        .top-bar .logo {
-            font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: 700;
-        }
-        .back-button {
-          background: var(--gold); color: var(--dark-bg); padding: 8px 18px;
-          border-radius: 5px; font-weight: 700; text-decoration: none;
-          transition: background-color 0.3s, transform 0.3s;
-        }
-        .back-button:hover {
-          background-color: #fff; transform: scale(1.05);
-        }
-        .container { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 50px 20px; 
-            position: relative; /* Ensure it stays on top */
-            z-index: 1;
-        }
-        .migration-content {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border: 1px solid #555;
-            border-radius: 10px;
-        }
-        .migration-content .main-title { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold); text-align: center; margin-bottom: 5px; }
-        .migration-content .sub-title { font-family: 'Cinzel', serif; font-size: 1.5rem; text-align: center; margin-bottom: 25px; letter-spacing: 1px; color: var(--text-muted); }
-        .migration-content .list-heading { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold); margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 8px; }
-        .migration-content ul { list-style: none; padding-left: 0; }
-        .migration-content li { padding-left: 10px; margin-bottom: 12px; }
-        .migration-content li::before { content: '・ '; color: var(--gold); font-weight: bold; margin-left: -10px; }
-
-        @media (max-width: 768px) {
-          .top-bar { padding: 15px 20px; }
-          .container { padding: 30px 15px; }
-          .migration-content { padding: 30px 20px; }
-          .migration-content .main-title { font-size: 2rem; }
-          .migration-content .sub-title { font-size: 1.2rem; }
-          .migration-content .list-heading { font-size: 1.2rem; }
-        }
-    </style>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
