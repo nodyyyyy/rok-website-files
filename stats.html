@@ -24,29 +24,19 @@
       background-color: var(--dark-bg);
       color: var(--text-light);
       line-height: 1.7;
-      /* Add background texture */
       background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
     }
 
-    /* --- PARTICLE BACKGROUND STYLES --- */
     #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1; /* Place it behind everything */
+      position: fixed; width: 100%; height: 100%;
+      top: 0; left: 0; z-index: -1;
     }
 
     .top-bar {
-      background-color: var(--card-bg);
-      padding: 15px 40px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative; /* Ensure it stays on top */
-      z-index: 2;
+      background-color: var(--card-bg); padding: 15px 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5); display: flex;
+      justify-content: space-between; align-items: center;
+      position: relative; z-index: 2;
     }
     .top-bar .logo {
         font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); text-decoration: none; font-weight: 700;
@@ -60,21 +50,50 @@
       background-color: #fff; transform: scale(1.05);
     }
     .container { 
-        max-width: 1200px; 
-        margin: 0 auto; 
-        padding: 50px 20px; 
-        position: relative; /* Ensure it stays on top */
-        z-index: 1;
+        max-width: 1200px; margin: 0 auto; padding: 50px 20px; 
+        position: relative; z-index: 1;
     }
     .page-title { 
-      font-family: 'Cinzel', serif; font-weight: 700;
-      text-align: center; font-size: 2.8rem; color: var(--gold); margin-bottom: 40px; letter-spacing: 1px; 
+      font-family: 'Cinzel', serif; font-weight: 700; text-align: center; 
+      font-size: 2.8rem; color: var(--gold); margin-bottom: 30px; letter-spacing: 1px; 
     }
+
+    .search-container {
+      position: relative;
+      margin-bottom: 25px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-container .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    #searchInput {
+      width: 100%;
+      padding: 12px 20px 12px 45px;
+      background-color: var(--card-bg);
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    #searchInput:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    #searchInput::placeholder {
+      color: var(--text-muted);
+    }
+
     .table-container { 
       overflow-x: auto; 
       background-color: var(--card-bg);
-      border: 1px solid #444;
-      border-radius: 10px;
+      border: 1px solid #444; border-radius: 10px;
       padding: 20px;
     }
     .csv-table { width: 100%; border-collapse: collapse; }
@@ -86,7 +105,23 @@
     @media (max-width: 768px) {
       .top-bar { padding: 15px 20px; }
       .container { padding: 30px 15px; }
-      .page-title { font-size: 2.2rem; }
+
+      /* --- MOBILE OPTIMIZATIONS for Search & Layout --- */
+      .page-title { 
+        font-size: 2.2rem;
+        margin-bottom: 20px; /* Tighter spacing on mobile */
+      }
+      .search-container {
+        margin-bottom: 20px;
+      }
+      #searchInput {
+        font-size: 0.9rem; /* Match font size to table content */
+        padding: 10px 15px 10px 40px; /* Reduced padding for compact look */
+      }
+      .search-container .search-icon {
+        left: 13px; /* Adjust icon position for new padding */
+      }
+
       .table-container { padding: 10px; }
       .csv-table th, .csv-table td { padding: 10px 8px; font-size: 0.9rem; }
     }
@@ -103,6 +138,12 @@
 
   <main class="container">
     <h1 class="page-title">Detailed Kingdom Statistics</h1>
+    
+    <div class="search-container">
+      <i class="fa-solid fa-search search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Search by Player ID...">
+    </div>
+
     <div id="csv-table-container" class="table-container">
       <p>Loading stats...</p>
     </div>
@@ -154,7 +195,27 @@
           tableContainer.innerHTML = '<p>Could not load stats. Please try again later.</p>';
         }
       }
-      loadCSV();
+      
+      loadCSV().then(() => {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keyup', () => {
+          const filter = searchInput.value.toUpperCase().trim();
+          const table = document.querySelector('.csv-table');
+          const tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+          for (let i = 0; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName('td')[0]; 
+            if (td) {
+              let txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        });
+      });
     });
   </script>
 
