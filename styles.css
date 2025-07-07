@@ -59,7 +59,6 @@ h2.section-title, .page-title {
 .char { transform: translateY(115px); transition: transform .5s; }
 
 /* --- HEADER & NAVIGATION --- */
-/* THIS IS THE FIX: The rule now only targets the hero header on the main page */
 header#hero-header {
   position: relative; 
   z-index: 2;
@@ -203,4 +202,10 @@ footer { background: #111; color: var(--text-muted); text-align: center; padding
   .migration-content .main-title { font-size: 2rem; }
   .migration-content .sub-title { font-size: 1.2rem; }
   .migration-content .list-heading { font-size: 1.2rem; }
+
+  /* THIS IS THE FIX: Smaller back button on mobile */
+  .back-button {
+    padding: 6px 14px;
+    font-size: 0.9rem;
+  }
 }
