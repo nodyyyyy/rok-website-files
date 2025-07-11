@@ -55,7 +55,6 @@
     <hr class="section-divider">
     <section id="highlights" class="container fade-in">
         <h2 class="section-title">Kingdom Stats</h2>
-        <!-- THIS IS THE FIX for Mobile Stats Layout HTML -->
         <div class="card-grid">
           <div class="card"><i class="icon fa-solid fa-star"></i><h3>Total Power</h3><p>9.04 B</p></div>
           <div class="card-grid-double">
@@ -81,7 +80,6 @@
     </section>
     <hr class="section-divider">
     <section id="join" class="container fade-in">
-      <!-- THIS IS THE FIX for Mobile Join Us Text -->
       <h2 class="section-title">
         <span class="desktop-only">Ready to Forge a Legend?</span>
         <span class="mobile-only">Ready to Join Us?</span>
@@ -102,7 +100,10 @@
   function applyDeviceOptimization() {
     const savedChoice = localStorage.getItem('deviceChoice');
     const heroHeader = document.getElementById('hero-header');
-    if (savedChoice === 'mobile') { heroHeader.classList.add('mobile-optimized'); document.body.classList.add('mobile-theme'); }
+    if (savedChoice === 'mobile') { 
+      heroHeader.classList.add('mobile-optimized'); 
+      document.body.classList.add('mobile-theme'); // This class is no longer used but safe to keep
+    }
   }
   applyDeviceOptimization();
   window.onload = function() {
@@ -117,13 +118,14 @@
       retina_detect: true,
     });
     gsap.registerPlugin(ScrollTrigger);
-    const titles = document.querySelectorAll('.section-title');
-    titles.forEach(title => {
-      let textContent = title.innerHTML;
-      if(window.innerWidth <= 600 && title.querySelector('.mobile-only')){
-         textContent = title.querySelector('.mobile-only').innerHTML;
-      } else if (title.querySelector('.desktop-only')){
-         textContent = title.querySelector('.desktop-only').innerHTML;
+    document.querySelectorAll('.section-title').forEach(title => {
+      let textContent = title.textContent.trim();
+      const desktopSpan = title.querySelector('.desktop-only');
+      const mobileSpan = title.querySelector('.mobile-only');
+      if (window.innerWidth <= 600 && mobileSpan) {
+        textContent = mobileSpan.textContent;
+      } else if (desktopSpan) {
+        textContent = desktopSpan.textContent;
       }
       const chars = textContent.split('').map(char => `<span class="char">${char === ' ' ? ' ' : char}</span>`).join('');
       title.innerHTML = chars;
