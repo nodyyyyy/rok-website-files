@@ -1,4 +1,4 @@
-/* === MASTER STYLESHEET (FINAL) === */
+/* === MASTER STYLESHEET === */
 
 :root {
   --gold: #FFD700;
@@ -23,13 +23,7 @@ body {
   color: var(--text-light);
   line-height: 1.7;
   background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
-}
-
-/* THIS IS THE FIX: A dedicated wrapper to clip all overflow */
-.page-wrapper {
-  position: relative;
-  width: 100%;
-  overflow-x: clip; /* 'clip' is more performant than 'hidden' */
+  overflow-x: hidden;
 }
 
 /* --- DEVICE CHOICE PAGE --- */
@@ -47,7 +41,6 @@ body {
 }
 .choice-btn:hover { background-color: var(--gold); color: var(--dark-bg); transform: translateY(-5px); }
 .choice-btn i { margin-right: 10px; }
-
 
 /* --- BACKGROUND & PRELOADER --- */
 #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
@@ -181,6 +174,25 @@ footer { background: #111; color: var(--text-muted); text-align: center; padding
   .card-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) {
+  /* --- MOBILE-SPECIFIC THEME OVERRIDES --- */
+  
+  body {
+    background-image: url('https://i.postimg.cc/zX1KzSw3/Dise-o-sin-t-tulo.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    color: #333;
+  }
+  
+  #particles-js { display: none; }
+  main { background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); }
+  nav, .top-bar { background-color: rgba(245, 245, 245, 0.85); }
+  .nav-logo a, .nav-links a { color: #333; }
+  .nav-links a:hover, .nav-links a.active { color: #a0791c; border-bottom-color: #a0791c; }
+  .hero-content h1, .hero-content p, .card h3, #council .card h3 { color: #fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+  h2.section-title, .page-title, .migration-content .main-title { background: none; -webkit-text-fill-color: #a0791c; color: #a0791c; }
+  .card { background: rgba(255, 255, 255, 0.7); border-color: #ddd; }
+  footer { background-color: rgba(255, 255, 255, 0.8); color: #555; border-top-color: #ddd; }
   header#hero-header.mobile-optimized, header#hero-header { background-attachment: scroll; }
   .choice-content h3 { font-size: 1.8rem; }
   .choice-content p { font-size: 1rem; }
@@ -189,18 +201,34 @@ footer { background: #111; color: var(--text-muted); text-align: center; padding
   .card { padding: 20px 15px; }
   .hero-content h1, h2.section-title, .page-title { font-size: 2.2rem; }
   .card h3 { font-size: 1.1rem; }
-  .card .icon { font-size: 2.5rem; }
-  #highlights .card p { font-size: 2rem; }
+  .card .icon { color: #a0791c; }
+  #highlights .card { background: transparent; }
+  #highlights .card p, #highlights .card h3 { color: #333; text-shadow: none;}
+  
+  /* --- THIS IS THE FIX for Mobile Stats Layout --- */
+  #highlights .card-grid {
+    grid-template-columns: 1fr; /* Stack them vertically */
+  }
+  #highlights .card-grid .card:nth-child(1) {
+    grid-column: 1 / -1; /* Make the first one take the full width */
+  }
+  #highlights .card-grid-double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column: 1 / -1;
+  }
+  
   .card-grid { grid-template-columns: 1fr; }
   .page-title { margin-bottom: 20px; }
   .search-container { margin-bottom: 20px; }
-  #searchInput { font-size: 0.9rem; padding: 10px 15px 10px 40px; }
-  .search-container .search-icon { left: 13px; }
-  .table-container { padding: 10px; }
-  .csv-table th, .csv-table td { padding: 10px 8px; font-size: 0.9rem; }
-  .migration-content { padding: 30px 20px; }
-  .migration-content .main-title { font-size: 2rem; }
-  .migration-content .sub-title { font-size: 1.2rem; }
-  .migration-content .list-heading { font-size: 1.2rem; }
+  #searchInput { background-color: rgba(255, 255, 255, 0.8); border-color: #ccc; color: #333; }
+  #searchInput::placeholder { color: #888; }
+  .table-container { background-color: rgba(255, 255, 255, 0.8); }
+  .csv-table th { background-color: #a0791c; color: #fff; }
+  .csv-table tbody tr:nth-of-type(even) { background-color: rgba(230, 230, 230, 0.7); }
+  .migration-content { background-color: rgba(255, 255, 255, 0.8); }
+  .migration-content .sub-title { color: #555; }
+  .migration-content .list-heading { color: #a0791c; }
+  .migration-content li::before { color: #a0791c; }
   .back-button { padding: 6px 14px; font-size: 0.9rem; }
 }
