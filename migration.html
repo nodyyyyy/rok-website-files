@@ -4,29 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Migration Info - Kingdom 3558</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div id="particles-js"></div>
-
+<div class="page-wrapper">
     <header class="top-bar">
         <div class="logo">Kingdom 3558</div>
-        <a href="index.html" class="back-button"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <a href="home.html" class="back-button"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
     </header>
-
     <main class="container">
         <div class="migration-content">
             <h2 class="main-title">MIGRATION</h2>
             <h3 class="sub-title">SANDSEY - KINGDOM 3558</h3>
-            
             <h4 class="list-heading">About Our Kingdom</h4>
             <ul>
               <li>C SEED</li>
@@ -40,7 +33,6 @@
               <li>DEADWEIGHT CLEARING AFTER EACH KVK</li>
               <li>TITLE BOT</li>
             </ul>
-        
             <h4 class="list-heading">What We Are Looking For</h4>
             <ul>
                 <li>T4 FIGHTERS</li>
@@ -49,25 +41,6 @@
             </ul>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            tsParticles.load("particles-js", {
-                fpsLimit: 60,
-                particles: {
-                    number: { value: 60, density: { enable: true, value_area: 800 } },
-                    color: { value: "#ffd700" },
-                    shape: { type: "circle" },
-                    opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-                    size: { value: 2, random: true, anim: { enable: false } },
-                    links: { enable: true, distance: 150, color: "#ffd700", opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false },
-                },
-                interactivity: { events: { onhover: { enable: false }, resize: true } },
-                retina_detect: true,
-            });
-        });
-    </script>
+</div>
 </body>
 </html>
