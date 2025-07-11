@@ -1,4 +1,4 @@
-/* === MASTER STYLESHEET (FINAL - CORRECTED) === */
+/* === MASTER STYLESHEET (FINAL - CORRECTED #2) === */
 
 :root {
   --gold: #FFD700;
@@ -204,28 +204,18 @@ footer { background: #111; color: var(--text-muted); text-align: center; padding
   .desktop-only { display: none; }
   .mobile-only { display: block; }
 
-  /* THIS IS THE CORRECTED MOBILE STATS LAYOUT */
+  /* THIS IS THE FINAL, CORRECTED LAYOUT FIX */
+  .card-grid { 
+    grid-template-columns: 1fr; /* Default to single column for mobile */
+  }
   .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Default to a single column */
-    grid-template-areas: 
-      "power"
-      "kp"
-      "deaths";
-  }
-  .stats-grid .stat-card-power {
-    grid-area: power;
-  }
-  .stats-grid .stat-card-kp {
-    grid-area: kp;
-  }
-  .stats-grid .stat-card-deaths {
-    grid-area: deaths;
-  }
-  /* Now, group the bottom two into a row */
-  .stats-grid {
+    display: grid; /* Override the default for this specific grid */
+    grid-template-columns: 1fr 1fr; /* Two columns */
     grid-template-areas:
       "power power"
       "kp    deaths";
   }
+  .stats-grid .stat-card-power { grid-area: power; }
+  .stats-grid .stat-card-kp { grid-area: kp; }
+  .stats-grid .stat-card-deaths { grid-area: deaths; }
 }
