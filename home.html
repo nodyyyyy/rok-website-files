@@ -55,6 +55,7 @@
     <hr class="section-divider">
     <section id="highlights" class="container fade-in">
         <h2 class="section-title">Kingdom Stats</h2>
+        <!-- THIS IS THE NEW HTML STRUCTURE -->
         <div class="card-grid">
           <div class="card"><i class="icon fa-solid fa-star"></i><h3>Total Power</h3><p>9.04 B</p></div>
           <div class="card-grid-double">
@@ -102,7 +103,6 @@
     const heroHeader = document.getElementById('hero-header');
     if (savedChoice === 'mobile') { 
       heroHeader.classList.add('mobile-optimized'); 
-      document.body.classList.add('mobile-theme'); // This class is no longer used but safe to keep
     }
   }
   applyDeviceOptimization();
