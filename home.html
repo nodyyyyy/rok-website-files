@@ -25,10 +25,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+<div class="page-wrapper">
   <div id="particles-js"></div>
   <div class="preloader"><div class="spinner"></div></div>
-
   <header id="hero-header">
     <nav>
       <div class="nav-logo"><a href="#">Kingdom 3558</a></div>
@@ -44,7 +43,6 @@
         <p>United in glory, forging legends on the battlefield.</p>
     </div>
   </header>
-  
   <main>
     <section id="about" class="container fade-in">
         <h2 class="section-title">About Us</h2>
@@ -54,9 +52,7 @@
             <div class="card"><i class="icon fa-solid fa-desktop"></i><h3>Data Collection</h3><p>Our leaders and officers meticulously track contributions to ensure fairness and equal opportunities for all members.</p></div>
         </div>
     </section>
-    
     <hr class="section-divider">
-
     <section id="highlights" class="container fade-in">
         <h2 class="section-title">Kingdom Stats</h2>
         <div class="card-grid">
@@ -68,9 +64,7 @@
           <a href="stats.html" class="stats-button"><i class="fa-solid fa-chart-line"></i> View Detailed Stats</a>
         </div>
     </section>
-    
     <hr class="section-divider">
-
     <section id="council" class="container fade-in">
         <h2 class="section-title">Meet our Council</h2>
         <div class="card-grid">
@@ -82,9 +76,7 @@
             <div class="card"><img src="https://via.placeholder.com/150/0d0d0d/FFD700?text=R4" alt="Council Member 6"><h3>Leader Name</h3></div>
         </div>
     </section>
-
     <hr class="section-divider">
-
     <section id="join" class="container fade-in">
       <h2 class="section-title">Ready to Forge a Legend?</h2>
       <p style="max-width:600px; margin:-20px auto 30px auto; text-align:center;">We are recruiting active, committed players eager to grow and dominate. If you have team spirit and a thirst for victory, your place is here.</p>
@@ -94,79 +86,57 @@
       </div>
     </section>
   </main>
-  
   <footer><p>Page created by Nody for Kingdom 3558 - Rise of Kingdoms | © 2025</p></footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script>
-    // --- PRELOADER & DEVICE OPTIMIZATION ---
-    function applyDeviceOptimization() {
-      const savedChoice = localStorage.getItem('deviceChoice');
-      const heroHeader = document.getElementById('hero-header');
-      if (savedChoice === 'mobile') {
-        heroHeader.classList.add('mobile-optimized');
-      }
-    }
-    applyDeviceOptimization();
-
-    window.onload = function() {
-      const preloader = document.querySelector('.preloader');
-      preloader.classList.add('hidden');
-    };
-
-    // --- All other scripts from before ---
-    document.addEventListener('DOMContentLoaded', () => {
-      tsParticles.load("particles-js", {
-        fpsLimit: 60,
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: "#ffd700" },
-          shape: { type: "circle" },
-          opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-          size: { value: 2, random: true, anim: { enable: false } },
-          links: { enable: true, distance: 150, color: "#ffd700", opacity: 0.4, width: 1 },
-          move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-          modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 }, },
-        },
-        retina_detect: true,
-      });
-      gsap.registerPlugin(ScrollTrigger);
-      const titles = document.querySelectorAll('.section-title');
-      titles.forEach(title => {
-        const chars = title.textContent.split('').map(char => `<span class="char">${char === ' ' ? ' ' : char}</span>`).join('');
-        title.innerHTML = chars;
-        gsap.from(title.querySelectorAll('.char'), {
-          y: 80, opacity: 0, stagger: 0.05, ease: "power2.out", duration: 1,
-          scrollTrigger: { trigger: title, start: "top 85%", toggleActions: "play none none none", }
-        });
-      });
-      const navToggle = document.querySelector('.nav-toggle');
-      const navLinks = document.querySelector('.nav-links');
-      navToggle.addEventListener('click', () => { navLinks.classList.toggle('nav-active'); });
-      const sections = document.querySelectorAll('main section');
-      const navLi = document.querySelectorAll('.nav-links a:not(.nav-cta)');
-      window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          if (pageYOffset >= sectionTop - 150) { current = section.getAttribute('id'); }
-        });
-        navLi.forEach(a => {
-          a.classList.remove('active');
-          if (a.getAttribute('href') === `#${current}`) { a.classList.add('active'); }
-        });
-      });
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  function applyDeviceOptimization() {
+    const savedChoice = localStorage.getItem('deviceChoice');
+    const heroHeader = document.getElementById('hero-header');
+    if (savedChoice === 'mobile') { heroHeader.classList.add('mobile-optimized'); }
+  }
+  applyDeviceOptimization();
+  window.onload = function() {
+    const preloader = document.querySelector('.preloader');
+    preloader.classList.add('hidden');
+  };
+  document.addEventListener('DOMContentLoaded', () => {
+    tsParticles.load("particles-js", {
+      fpsLimit: 60,
+      particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: "#ffd700" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } }, size: { value: 2, random: true, anim: { enable: false } }, links: { enable: true, distance: 150, color: "#ffd700", opacity: 0.4, width: 1 }, move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }, },
+      interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 }, }, },
+      retina_detect: true,
     });
-  </script>
+    gsap.registerPlugin(ScrollTrigger);
+    const titles = document.querySelectorAll('.section-title');
+    titles.forEach(title => {
+      const chars = title.textContent.split('').map(char => `<span class="char">${char === ' ' ? ' ' : char}</span>`).join('');
+      title.innerHTML = chars;
+      gsap.from(title.querySelectorAll('.char'), { y: 80, opacity: 0, stagger: 0.05, ease: "power2.out", duration: 1, scrollTrigger: { trigger: title, start: "top 85%", toggleActions: "play none none none", } });
+    });
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => { navLinks.classList.toggle('nav-active'); });
+    const sections = document.querySelectorAll('main section');
+    const navLi = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 150) { current = section.getAttribute('id'); }
+      });
+      navLi.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === `#${current}`) { a.classList.add('active'); }
+      });
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  });
+</script>
 </body>
 </html>
