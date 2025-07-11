@@ -186,61 +186,27 @@ footer { background: #111; color: var(--text-muted); text-align: center; padding
   .hero-content h1, h2.section-title, .page-title { font-size: 3rem; }
   .card-grid { grid-template-columns: 1fr 1fr; }
 }
-
 @media (max-width: 600px) {
   /* --- MOBILE-SPECIFIC THEME OVERRIDES --- */
   
   body {
     background-image: url('https://i.postimg.cc/zX1KzSw3/Dise-o-sin-t-tulo.png');
-    background-size: cover;
+    /* THIS IS THE FIX: Changed 'cover' to '100% auto' */
+    background-size: 100% auto;
     background-position: center center;
     background-attachment: fixed;
     color: #333; /* Dark text for readability */
   }
   
-  #particles-js {
-    display: none; /* Hide particles on mobile */
-  }
-
-  main {
-    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white main area */
-    backdrop-filter: blur(5px);
-  }
-
-  nav {
-    background-color: rgba(245, 245, 245, 0.85);
-  }
-
-  .nav-logo a, .nav-links a {
-    color: #333;
-  }
-  .nav-links a:hover, .nav-links a.active {
-    color: #a0791c; /* Darker gold for light background */
-    border-bottom-color: #a0791c;
-  }
-
-  .hero-content h1, .hero-content p, .card h3, #council .card h3 {
-    color: #fff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-  }
-  h2.section-title, .page-title, .migration-content .main-title {
-    background: none;
-    -webkit-text-fill-color: #a0791c;
-    color: #a0791c;
-  }
-  
-  .card {
-    background: rgba(255, 255, 255, 0.7);
-    border-color: #ddd;
-  }
-
-  footer {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #555;
-    border-top-color: #ddd;
-  }
-  
-  /* General mobile layout adjustments */
+  #particles-js { display: none; }
+  main { background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); }
+  nav, .top-bar { background-color: rgba(245, 245, 245, 0.85); }
+  .nav-logo a, .nav-links a { color: #333; }
+  .nav-links a:hover, .nav-links a.active { color: #a0791c; border-bottom-color: #a0791c; }
+  .hero-content h1, .hero-content p, .card h3, #council .card h3 { color: #fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+  h2.section-title, .page-title, .migration-content .main-title { background: none; -webkit-text-fill-color: #a0791c; color: #a0791c; }
+  .card { background: rgba(255, 255, 255, 0.7); border-color: #ddd; }
+  footer { background-color: rgba(255, 255, 255, 0.8); color: #555; border-top-color: #ddd; }
   header#hero-header.mobile-optimized, header#hero-header { background-attachment: scroll; }
   .container { padding: 60px 15px; }
   .card { padding: 20px 15px; }
