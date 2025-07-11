@@ -4,10 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome - Kingdom 3558</title>
+
+  <!-- This script runs immediately to redirect if a choice is already saved -->
   <script>
     const savedChoice = localStorage.getItem('deviceChoice');
-    if (savedChoice) { window.location.href = 'home.html'; }
+    if (savedChoice) {
+      window.location.href = 'home.html';
+    }
   </script>
+  
+  <!-- === THIS IS THE FIX: Rich Meta Tags for Embeds === -->
+  <meta name="description" content="Join Kingdom 3558! We are a united, KVK-focused kingdom recruiting active T4 and T5 fighters. Check our stats and join our Discord!">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta property="og:title" content="Kingdom 3558 - Rise of Kingdoms">
+  <meta property="og:description" content="United in glory, forging legends on the battlefield. Join our KVK-focused kingdom!">
+  <meta property="og:image" content="https://i.postimg.cc/HxNsMT7Q/temp-Image-Qja-I1u.avif">
+  <meta property="og:url" content="https://kd3558.netlify.app/">
+  <meta property="og:site_name" content="Kingdom 3558">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#FFD700">
+  <!-- End of Meta Tags -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -36,8 +57,14 @@
       particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: "#ffd700" }, links: { enable: true, distance: 150, color: "#ffd700", opacity: 0.4, width: 1 }, move: { enable: true, speed: 1 }, },
       interactivity: { events: { onhover: { enable: true, mode: "repulse" }, resize: true } },
     });
-    document.getElementById('select-desktop').addEventListener('click', () => { localStorage.setItem('deviceChoice', 'desktop'); window.location.href = 'home.html'; });
-    document.getElementById('select-mobile').addEventListener('click', () => { localStorage.setItem('deviceChoice', 'mobile'); window.location.href = 'home.html'; });
+    document.getElementById('select-desktop').addEventListener('click', () => {
+      localStorage.setItem('deviceChoice', 'desktop');
+      window.location.href = 'home.html';
+    });
+    document.getElementById('select-mobile').addEventListener('click', () => {
+      localStorage.setItem('deviceChoice', 'mobile');
+      window.location.href = 'home.html';
+    });
   });
 </script>
 </body>
