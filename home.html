@@ -26,18 +26,6 @@
 </head>
 <body>
 
-  <!-- NEW: Device Choice Overlay -->
-  <div id="device-choice-overlay">
-    <div class="choice-content">
-      <h3>Select Your Experience</h3>
-      <p>Choose your device for an optimized layout.</p>
-      <div class="choice-buttons">
-        <button id="select-desktop" class="choice-btn"><i class="fa-solid fa-desktop"></i> Desktop</button>
-        <button id="select-mobile" class="choice-btn"><i class="fa-solid fa-mobile-screen-button"></i> Mobile</button>
-      </div>
-    </div>
-  </div>
-
   <div id="particles-js"></div>
   <div class="preloader"><div class="spinner"></div></div>
 
@@ -113,36 +101,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
-    // --- PRELOADER & DEVICE CHOICE ---
-    const choiceOverlay = document.getElementById('device-choice-overlay');
-    const heroHeader = document.getElementById('hero-header');
-    
-    function hideChoiceOverlay() {
-        choiceOverlay.classList.add('hidden');
-    }
-
-    function handleDeviceChoice() {
+    // --- PRELOADER & DEVICE OPTIMIZATION ---
+    function applyDeviceOptimization() {
       const savedChoice = localStorage.getItem('deviceChoice');
-      if (savedChoice) {
-        choiceOverlay.style.display = 'none'; // Hide immediately if choice is saved
-        if (savedChoice === 'mobile') {
-          heroHeader.classList.add('mobile-optimized');
-        }
-      }
-
-      document.getElementById('select-desktop').addEventListener('click', () => {
-        localStorage.setItem('deviceChoice', 'desktop');
-        hideChoiceOverlay();
-      });
-
-      document.getElementById('select-mobile').addEventListener('click', () => {
-        localStorage.setItem('deviceChoice', 'mobile');
+      const heroHeader = document.getElementById('hero-header');
+      if (savedChoice === 'mobile') {
         heroHeader.classList.add('mobile-optimized');
-        hideChoiceOverlay();
-      });
+      }
     }
-
-    handleDeviceChoice();
+    applyDeviceOptimization();
 
     window.onload = function() {
       const preloader = document.querySelector('.preloader');
