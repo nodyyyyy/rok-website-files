@@ -23,7 +23,6 @@ body {
   color: var(--text-light);
   line-height: 1.7;
   background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
-  /* THIS IS THE ONLY CHANGE: Prevents horizontal scrolling */
   overflow-x: hidden;
 }
 
@@ -115,6 +114,8 @@ header#hero-header {
   background-size: cover; height: 100vh; display: flex; flex-direction: column;
   justify-content: center; align-items: center; text-align: center; padding: 20px;
   background-attachment: fixed;
+  /* THIS IS THE FIX: Clips the oversized "God Rays" pseudo-element */
+  overflow-x: hidden;
 }
 #hero-header.mobile-optimized {
   background-attachment: scroll;
