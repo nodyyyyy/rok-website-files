@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - Kingdom 3558</title>
+
+  <!-- This script runs immediately to redirect if a choice is already saved -->
+  <script>
+    const savedChoice = localStorage.getItem('deviceChoice');
+    if (savedChoice) {
+      window.location.href = 'home.html';
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Link to the same stylesheet for a consistent look -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Specific styles for the choice page layout */
+    #device-choice-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    .choice-content h3 {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .choice-content p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+    .choice-buttons {
+      display: flex;
+      gap: 20px;
+    }
+    .choice-btn {
+      background: var(--card-inner-bg);
+      color: var(--text-light);
+      border: 1px solid #444;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    }
+    .choice-btn:hover {
+      background-color: var(--gold);
+      color: var(--dark-bg);
+      transform: translateY(-5px);
+    }
+    .choice-btn i {
+      margin-right: 10px;
+    }
+    @media (max-width: 600px) {
+        .choice-content h3 { font-size: 1.8rem; }
+        .choice-content p { font-size: 1rem; }
+        .choice-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="particles-js"></div>
+
+  <div id="device-choice-page">
+    <div class="choice-content">
+      <h3>Select Your Experience</h3>
+      <p>Choose your device for an optimized layout.</p>
+      <div class="choice-buttons">
+        <button id="select-desktop" class="choice-btn"><i class="fa-solid fa-desktop"></i> Desktop</button>
+        <button id="select-mobile" class="choice-btn"><i class="fa-solid fa-mobile-screen-button"></i> Mobile</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set up particle background
+      tsParticles.load("particles-js", {
+        fpsLimit: 60,
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffd700" },
+          links: { enable: true, distance: 150, color: "#ffd700", opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 1 },
+        },
+        interactivity: { events: { onhover: { enable: true, mode: "repulse" }, resize: true } },
+      });
+
+      // Handle button clicks
+      document.getElementById('select-desktop').addEventListener('click', () => {
+        localStorage.setItem('deviceChoice', 'desktop');
+        window.location.href = 'home.html';
+      });
+
+      document.getElementById('select-mobile').addEventListener('click', () => {
+        localStorage.setItem('deviceChoice', 'mobile');
+        window.location.href = 'home.html';
+      });
+    });
+  </script>
+</body>
+</html>
